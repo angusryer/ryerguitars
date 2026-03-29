@@ -90,50 +90,46 @@ To deploy manually, trigger the workflow from the **Actions** tab → **Build an
 
 ---
 
-## Contact form (EmailJS + Brevo)
+## Contact form (EmailJS)
 
 The contact form uses [EmailJS](https://emailjs.com) to send email client-side without a backend. The credentials are hardcoded in `src/components/Contact.astro`:
 
 ```js
-var PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';
-var SERVICE_ID  = 'YOUR_SERVICE_ID';
-var TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
+const PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';
+const SERVICE_ID  = 'YOUR_SERVICE_ID';
+const TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
 ```
 
-### Initial setup
+### Current setup (Gmail)
 
-1. Create a free account at https://emailjs.com
-2. Add an email service — use **Custom SMTP** and enter Brevo's SMTP credentials (see below)
-3. Create a template using these variables: `{{from_name}}`, `{{from_email}}`, `{{message}}`
-4. Copy your **Public Key** (Account → API Keys), **Service ID**, and **Template ID**
-5. Replace the three placeholder values in `Contact.astro` and push
+The EmailJS service currently uses a Gmail OAuth connection. No SMTP credentials are needed — EmailJS handles auth via Google's OAuth flow.
 
-### Brevo SMTP credentials (for EmailJS service setup)
+### Migrating to dave@ryerguitars.com (Nesda Technology SMTP)
 
-| Field    | Value                        |
-|----------|------------------------------|
-| Host     | `smtp-relay.brevo.com`       |
-| Port     | `587`                        |
-| Username | your Brevo account email     |
-| Password | a Brevo SMTP key (Brevo dashboard → SMTP & API → SMTP tab → Generate a new SMTP key) |
+Dave's email is hosted by [Nesda Technology](https://nesda.ca) in Belleville, Ontario. To switch the contact form to send from `dave@ryerguitars.com`:
 
-### Migrating the sender address to dave@ryerguitars.com
+1. **Get SMTP credentials from Nesda**
+   - SMTP host (e.g. `mail.ryerguitars.com` — ask Nesda for the exact hostname)
+   - Port (typically `587` for TLS or `465` for SSL)
+   - Login (likely `dave@ryerguitars.com`)
+   - Password (Dave's email account password, or an app-specific password if available)
 
-Once the domain is live at `www.ryerguitars.com`, outgoing form emails can be sent _from_ `dave@ryerguitars.com` rather than a generic Brevo address. Steps:
+2. **Create a new EmailJS service**
+   - EmailJS dashboard → Email Services → Add New Service → **Custom SMTP** (not the Brevo preset)
+   - Fill in the SMTP host, port, login, and password from step 1
+   - Send a test email to verify the connection works
+   - Note the new **Service ID**
 
-1. **Verify the domain in Brevo**
-   - Brevo dashboard → Senders & IP → Domains → Add a domain → enter `ryerguitars.com`
-   - Add the DNS records Brevo provides (typically a TXT record for domain verification and a CNAME for DKIM signing) at your DNS provider
-   - Click **Verify** once the records have propagated (can take up to 30 min)
+3. **Update the code**
+   - Replace the `SERVICE_ID` value in `src/components/Contact.astro` with the new Service ID
+   - Push to `main`
 
-2. **Add the sender in Brevo**
-   - Senders & IP → Senders → Add a sender
-   - Name: `David Ryer`, Email: `dave@ryerguitars.com`
+4. **Delete the old Gmail service**
+   - EmailJS dashboard → Email Services → delete the Gmail service
 
-3. **Update the EmailJS service**
-   - EmailJS dashboard → Email Services → edit your Brevo service
-   - Set the **From email** field to `dave@ryerguitars.com`
-   - Save — no code changes required
+5. **Update the EmailJS template** (if needed)
+   - Set the **From Email** to `dave@ryerguitars.com`
+   - Set **Reply To** to `{{email}}` so replies go to the form submitter
 
 ---
 
