@@ -229,6 +229,13 @@ section { padding: 6rem 1.5rem; }
   font-family: var(--serif); font-size: 1.1rem;
   letter-spacing: 0.06em; color: var(--cream);
 }
+/* mobile only: single full-width centred column */
+@media (max-width: 540px) {
+  .models-grid {
+    grid-template-columns: 1fr;
+    justify-content: stretch;
+  }
+}
 
 /* ── CUSTOM BUILDS ── */
 .custom { background: var(--bg-warm); }
