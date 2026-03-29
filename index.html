@@ -96,11 +96,38 @@ section { padding: 6rem 1.5rem; }
   min-height: 100vh; display: flex; align-items: center; justify-content: center;
   text-align: center; padding-top: 5rem;
   position: relative; overflow: hidden;
-  background-image:
-    radial-gradient(ellipse at 30% 50%, rgba(201, 169, 110, 0.06) 0%, transparent 60%),
-    radial-gradient(ellipse at 70% 70%, rgba(201, 169, 110, 0.04) 0%, transparent 50%);
+  background-color: #0e0c0a;
 }
-.hero-content { position: relative; z-index: 1; padding: 0 1.5rem; }
+/* parallax image layer — oversized so offset never reveals edges */
+.hero__bg {
+  position: absolute;
+  inset: -25% 0;
+  background-image: url('images/bw-ebony-lg/bw-ebony-lg-10.jpg');
+  background-size: cover;
+  background-position: center;
+  will-change: transform;
+  filter: grayscale(20%) contrast(1.05);
+}
+/* dark overlay on top of the image */
+.hero__bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: rgba(14, 10, 8, 0.62);
+}
+/* subtle gold accent glow over the overlay */
+.hero__bg::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 50%, rgba(201, 169, 110, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 70%, rgba(201, 169, 110, 0.05) 0%, transparent 50%);
+  z-index: 1;
+}
+/* disable parallax on mobile/reduced-motion — use simple fixed cover instead */
+@media (max-width: 900px) {
+  .hero__bg { inset: 0; }
+}
+.hero-content { position: relative; z-index: 2; padding: 0 1.5rem; }
 .hero h1 {
   font-family: var(--serif); font-weight: 300;
   font-size: clamp(2.8rem, 7vw, 5.5rem);
@@ -304,6 +331,7 @@ footer {
 
 <!-- HERO -->
 <section class="hero" id="home">
+  <div class="hero__bg" data-parallax-speed="0.25"></div>
   <div class="hero-content">
     <h1>Ryer Guitars</h1>
     <div class="hero-rule"></div>
@@ -465,7 +493,7 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
   const reduced  = window.matchMedia('(prefers-reduced-motion: reduce)');
   if (mq.matches || reduced.matches) return;
 
-  const bands = Array.from(document.querySelectorAll('.parallax-band__inner'));
+  const bands = Array.from(document.querySelectorAll('.parallax-band__inner, .hero__bg'));
   let ticking = false;
 
   function updateParallax() {
