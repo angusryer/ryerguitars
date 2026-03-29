@@ -69,7 +69,7 @@ nav {
   margin: 5px 0; transition: all 0.3s;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .nav-toggle { display: block; }
   .nav-links {
     display: none; flex-direction: column; gap: 0;
@@ -96,14 +96,11 @@ section { padding: 6rem 1.5rem; }
   min-height: 100vh; display: flex; align-items: center; justify-content: center;
   text-align: center; padding-top: 5rem;
   position: relative; overflow: hidden;
-  /* CSS parallax: background stays fixed while content scrolls */
   background-image:
     radial-gradient(ellipse at 30% 50%, rgba(201, 169, 110, 0.06) 0%, transparent 60%),
     radial-gradient(ellipse at 70% 70%, rgba(201, 169, 110, 0.04) 0%, transparent 50%);
-  background-attachment: fixed;
-  background-size: cover;
 }
-.hero-content { position: relative; z-index: 1; }
+.hero-content { position: relative; z-index: 1; padding: 0 1.5rem; }
 .hero h1 {
   font-family: var(--serif); font-weight: 300;
   font-size: clamp(2.8rem, 7vw, 5.5rem);
@@ -156,8 +153,8 @@ section { padding: 6rem 1.5rem; }
   background-image: url('https://ryerguitars.com/wp-content/uploads/2017/02/Dreadnought-1-270x405.jpg');
   filter: grayscale(30%) contrast(1.1);
 }
-/* disable parallax motion on mobile — fixed/transform parallax causes jank on iOS */
-@media (max-width: 768px) {
+/* disable parallax motion on mobile/tablet — fixed/transform parallax causes jank on iOS */
+@media (max-width: 900px) {
   .parallax-band { height: 200px; }
   .parallax-band__inner { inset: 0; }
   .parallax-band--workshop .parallax-band__inner,
@@ -182,7 +179,12 @@ section { padding: 6rem 1.5rem; }
   /* reserve space before image loads → prevents CLS */
   background: var(--bg-card);
 }
-@media (max-width: 768px) {
+/* at tablet widths give more space to the text column and tighten the image */
+@media (max-width: 1024px) and (min-width: 901px) {
+  .about-content { grid-template-columns: 1.3fr 0.7fr; gap: 2rem; }
+  .about-img { aspect-ratio: 4/5; }
+}
+@media (max-width: 900px) {
   .about-content { grid-template-columns: 1fr; }
   .about-img { max-width: 400px; margin: 0 auto; display: block; }
 }
@@ -190,7 +192,9 @@ section { padding: 6rem 1.5rem; }
 /* ── MODELS ── */
 .models-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  /* max card width prevents the lone last card from stretching full-width */
+  grid-template-columns: repeat(auto-fill, minmax(220px, 260px));
+  justify-content: start;
   gap: 1.5rem; margin-top: 2rem;
 }
 .model-card {
@@ -216,7 +220,7 @@ section { padding: 6rem 1.5rem; }
 /* ── CUSTOM BUILDS ── */
 .custom { background: var(--bg-warm); }
 .custom .price-block {
-  font-family: var(--serif); font-size: 1.8rem;
+  font-family: var(--serif); font-size: clamp(1.3rem, 3vw, 1.8rem);
   color: var(--accent); margin: 1.5rem 0 2rem;
   font-weight: 300;
 }
@@ -231,7 +235,7 @@ section { padding: 6rem 1.5rem; }
   color: var(--cream-dim); font-size: 0.88rem; padding: 0.3rem 0;
   border-bottom: 1px solid rgba(201, 169, 110, 0.06);
 }
-@media (max-width: 600px) { .spec-columns { grid-template-columns: 1fr; } }
+@media (max-width: 768px) { .spec-columns { grid-template-columns: 1fr; } }
 
 /* ── CONTACT ── */
 .contact { text-align: center; }
@@ -246,7 +250,7 @@ section { padding: 6rem 1.5rem; }
 }
 .contact-line a:hover { border-color: var(--accent); }
 .contact-phone {
-  font-family: var(--serif); font-size: 1.6rem;
+  font-family: var(--serif); font-size: clamp(1.2rem, 3vw, 1.6rem);
   color: var(--cream); letter-spacing: 0.05em;
 }
 .social-links { margin-top: 2.5rem; }
@@ -270,11 +274,14 @@ footer {
 }
 
 /* ── ANIMATIONS ── */
-.fade-in {
-  opacity: 0; transform: translateY(20px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+/* only animate when motion is acceptable; content is always visible otherwise */
+@media (prefers-reduced-motion: no-preference) {
+  .fade-in {
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
 }
-.fade-in.visible { opacity: 1; transform: translateY(0); }
 </style>
 </head>
 <body>
@@ -283,10 +290,11 @@ footer {
 <nav>
   <div class="nav-inner">
     <a href="#home" class="nav-brand">Ryer <span>Guitars</span></a>
-    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-links"
+      onclick="var nl=document.querySelector('.nav-links');nl.classList.toggle('open');this.setAttribute('aria-expanded',nl.classList.contains('open'))">
       <span></span><span></span><span></span>
     </button>
-    <ul class="nav-links">
+    <ul class="nav-links" id="nav-links">
       <li><a href="#home" onclick="closeNav()">Home</a></li>
       <li><a href="#about" onclick="closeNav()">About</a></li>
       <li><a href="#models" onclick="closeNav()">Models</a></li>
@@ -455,7 +463,7 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 // ── PARALLAX BANDS ──
 // Skips on mobile (matchMedia) and respects prefers-reduced-motion
 (function () {
-  const mq       = window.matchMedia('(max-width: 768px)');
+  const mq       = window.matchMedia('(max-width: 900px)');
   const reduced  = window.matchMedia('(prefers-reduced-motion: reduce)');
   if (mq.matches || reduced.matches) return;
 
