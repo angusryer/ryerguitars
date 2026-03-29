@@ -109,33 +109,34 @@ section { padding: 6rem 1.5rem; }
   position: relative; overflow: hidden;
   background-color: #0e0c0a;
 }
-/* parallax image layer — oversized so offset never reveals edges */
+/* parallax image layer — oversized with vh so offset never reveals edges */
 .hero__bg {
   position: absolute;
-  inset: -25% 0;
+  top: -20vh; bottom: -20vh; left: 0; right: 0;
   background-image: url('images/bw-ebony-lg/bw-ebony-lg-10.jpg');
   background-size: cover;
   background-position: center;
   will-change: transform;
   filter: grayscale(20%) contrast(1.05);
 }
-/* dark overlay on top of the image */
+/* dark overlay */
 .hero__bg::after {
   content: '';
   position: absolute; inset: 0;
   background: rgba(14, 10, 8, 0.62);
+  z-index: 1;
 }
-/* subtle gold accent glow over the overlay */
+/* subtle gold accent glow */
 .hero__bg::before {
   content: '';
   position: absolute; inset: 0;
   background:
     radial-gradient(ellipse at 30% 50%, rgba(201, 169, 110, 0.08) 0%, transparent 60%),
     radial-gradient(ellipse at 70% 70%, rgba(201, 169, 110, 0.05) 0%, transparent 50%);
-  z-index: 1;
+  z-index: 2;
 }
 @media (max-width: 900px) {
-  .hero__bg { inset: 0; }
+  .hero__bg { top: 0; bottom: 0; }
 }
 .hero-content { position: relative; z-index: 2; padding: 0 1.5rem; }
 .hero h1 {
@@ -206,14 +207,19 @@ section { padding: 6rem 1.5rem; }
   gap: 1.5rem; margin-top: 2rem;
 }
 .model-card {
-  position: relative; overflow: hidden; cursor: default;
+  cursor: default;
   background: var(--bg-card);
   border: 1px solid rgba(201, 169, 110, 0.08);
   transition: border-color 0.4s;
 }
 .model-card:hover { border-color: rgba(201, 169, 110, 0.25); }
+/* overflow:hidden scoped to the image wrapper only so the label is never clipped */
+.model-card .img-wrap {
+  overflow: hidden;
+  aspect-ratio: 3/4;
+}
 .model-card img {
-  width: 100%; aspect-ratio: 2/3; object-fit: cover;
+  width: 100%; height: 100%; object-fit: cover;
   display: block; transition: transform 0.6s ease;
   background: var(--bg-card);
 }
@@ -384,38 +390,52 @@ footer {
     <p style="color: var(--cream-dim); max-width: 600px; margin-bottom: 1rem; font-size: 0.95rem;">Every Ryer guitar is meticulously hand crafted. Whether you are a seasoned veteran or just looking for a great sounding, high quality guitar, Dave is always up for talking shop.</p>
     <div class="models-grid">
       <div class="model-card">
-        <img src="images/ryer-lg/ryer-lg-100.jpg"
-             alt="Ryer Dreadnought" width="1600" height="2400" loading="lazy" decoding="async">
+        <div class="img-wrap">
+          <img src="images/ryer-lg/ryer-lg-100.jpg"
+               alt="Ryer Dreadnought" width="1600" height="2400" loading="lazy" decoding="async">
+        </div>
         <div class="card-label">Dreadnought</div>
       </div>
       <div class="model-card">
-        <img src="images/ryer-lg/ryer-lg-108.jpg"
-             alt="Ryer Jumbo" width="1600" height="2400" loading="lazy" decoding="async">
+        <div class="img-wrap">
+          <img src="images/ryer-lg/ryer-lg-108.jpg"
+               alt="Ryer Jumbo" width="1600" height="2400" loading="lazy" decoding="async">
+        </div>
         <div class="card-label">Jumbo</div>
       </div>
       <div class="model-card">
-        <img src="images/ryer-lg/ryer-lg-116.jpg"
-             alt="Ryer Classical / Flamenco" width="1600" height="2400" loading="lazy" decoding="async">
+        <div class="img-wrap">
+          <img src="images/ryer-lg/ryer-lg-116.jpg"
+               alt="Ryer Classical / Flamenco" width="1600" height="2400" loading="lazy" decoding="async">
+        </div>
         <div class="card-label">Classical / Flamenco</div>
       </div>
       <div class="model-card">
-        <img src="images/ryer-lg/ryer-lg-124.jpg"
-             alt="Ryer Mandolin" width="1600" height="2400" loading="lazy" decoding="async">
+        <div class="img-wrap">
+          <img src="images/ryer-lg/ryer-lg-124.jpg"
+               alt="Ryer Mandolin" width="1600" height="2400" loading="lazy" decoding="async">
+        </div>
         <div class="card-label">Mandolin</div>
       </div>
       <div class="model-card">
-        <img src="images/ryer-lg/ryer-lg-132.jpg"
-             alt="Ryer OO" width="1600" height="2400" loading="lazy" decoding="async">
+        <div class="img-wrap">
+          <img src="images/ryer-lg/ryer-lg-132.jpg"
+               alt="Ryer OO" width="1600" height="2400" loading="lazy" decoding="async">
+        </div>
         <div class="card-label">OO</div>
       </div>
       <div class="model-card">
-        <img src="images/ryer-lg/ryer-lg-140.jpg"
-             alt="Ryer OM" width="1600" height="2400" loading="lazy" decoding="async">
+        <div class="img-wrap">
+          <img src="images/ryer-lg/ryer-lg-140.jpg"
+               alt="Ryer OM" width="1600" height="2400" loading="lazy" decoding="async">
+        </div>
         <div class="card-label">OM</div>
       </div>
       <div class="model-card">
-        <img src="images/ryer-lg/ryer-lg-148.jpg"
-             alt="Ryer Standard Steel String" width="1600" height="2400" loading="lazy" decoding="async">
+        <div class="img-wrap">
+          <img src="images/ryer-lg/ryer-lg-148.jpg"
+               alt="Ryer Standard Steel String" width="1600" height="2400" loading="lazy" decoding="async">
+        </div>
         <div class="card-label">Standard Steel String</div>
       </div>
     </div>
@@ -508,6 +528,8 @@ const observer = new IntersectionObserver(entries => {
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
 // ── HERO PARALLAX ──
+// The hero is always at the top of the page, so we drive the offset
+// directly from scrollY — simple, no viewport-centre math needed.
 (function () {
   const mq      = window.matchMedia('(max-width: 900px)');
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -515,16 +537,12 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
   const heroBg  = document.querySelector('.hero__bg');
   if (!heroBg) return;
+  const speed   = parseFloat(heroBg.dataset.parallaxSpeed) || 0.25;
   let ticking   = false;
 
   function updateParallax() {
-    const scrollY = window.scrollY;
-    const hero    = heroBg.parentElement;
-    const rect    = hero.getBoundingClientRect();
-    if (rect.bottom < -200 || rect.top > window.innerHeight + 200) { ticking = false; return; }
-    const speed   = parseFloat(heroBg.dataset.parallaxSpeed) || 0.25;
-    const centre  = rect.top + rect.height / 2 - window.innerHeight / 2;
-    heroBg.style.transform = 'translateY(' + (centre * speed) + 'px)';
+    // scrollY * speed moves the bg upward at a fraction of the scroll rate
+    heroBg.style.transform = 'translateY(' + (window.scrollY * speed) + 'px)';
     ticking = false;
   }
 
