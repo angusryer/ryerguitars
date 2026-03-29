@@ -57,61 +57,44 @@
   </div>
 </section>
 
-<!-- EmailJS SDK -->
-<script src='https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js'></script>
 <script>
-  window.addEventListener("load", function () {
-    var PUBLIC_KEY  = "W_sUo8TZ8Z52JAwbc";
-    var SERVICE_ID  = "service_ihwipst";
-    var TEMPLATE_ID = "template_z00etfu";
+  import emailjs from "@emailjs/browser";
 
-    if (typeof emailjs === "undefined") {
-      console.error("EmailJS failed to load.");
-      return;
+  const PUBLIC_KEY  = "W_sUo8TZ8Z52JAwbc";
+  const SERVICE_ID  = "service_ihwipst";
+  const TEMPLATE_ID = "template_z00etfu";
+
+  emailjs.init({ publicKey: PUBLIC_KEY });
+
+  const form   = document.getElementById("contact-form") as HTMLFormElement;
+  const status = form.querySelector(".form-status") as HTMLElement;
+  const btn    = form.querySelector(".form-submit") as HTMLButtonElement;
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+
+    btn.classList.add("sending");
+    btn.disabled = true;
+    status.textContent = "";
+
+    try {
+      await emailjs.send(SERVICE_ID, TEMPLATE_ID, {
+        name:       (form.querySelector('[name="from_name"]') as HTMLInputElement).value,
+        from_email: (form.querySelector('[name="from_email"]') as HTMLInputElement).value,
+        message:    (form.querySelector('[name="message"]') as HTMLTextAreaElement).value,
+      });
+      status.textContent = "Message sent — Dave will be in touch soon.";
+      status.className = "form-status success";
+      form.reset();
+    } catch (err) {
+      console.error("EmailJS error:", err);
+      status.textContent = "Something went wrong. Please try emailing dave@ryerguitars.com directly.";
+      status.className = "form-status error";
+    } finally {
+      btn.classList.remove("sending");
+      btn.disabled = false;
     }
-
-    emailjs.init({ publicKey: PUBLIC_KEY });
-
-    var form   = document.getElementById("contact-form");
-    var status = form.querySelector(".form-status");
-    var btn    = form.querySelector(".form-submit");
-
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      if (!form.checkValidity()) {
-        form.reportValidity();
-        return;
-      }
-
-      btn.classList.add("sending");
-      btn.disabled = true;
-      status.textContent = "";
-
-      // EmailJS template uses {{name}} — map from_name manually
-      var templateParams = {
-        name:    form.querySelector('[name="from_name"]').value,
-        from_email: form.querySelector('[name="from_email"]').value,
-        message: form.querySelector('[name="message"]').value,
-      };
-
-      emailjs
-        .send(SERVICE_ID, TEMPLATE_ID, templateParams)
-        .then(function () {
-          status.textContent = "Message sent — Dave will be in touch soon.";
-          status.className = "form-status success";
-          form.reset();
-        })
-        .catch(function (err) {
-          console.error("EmailJS error:", err);
-          status.textContent =
-            "Something went wrong. Please try emailing dave@ryerguitars.com directly.";
-          status.className = "form-status error";
-        })
-        .finally(function () {
-          btn.classList.remove("sending");
-          btn.disabled = false;
-        });
-    });
   });
 </script>
 
