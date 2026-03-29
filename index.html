@@ -96,13 +96,12 @@ section { padding: 6rem 1.5rem; }
   min-height: 100vh; display: flex; align-items: center; justify-content: center;
   text-align: center; padding-top: 5rem;
   position: relative; overflow: hidden;
-}
-.hero::before {
-  content: ''; position: absolute; inset: 0;
-  background:
+  /* CSS parallax: background stays fixed while content scrolls */
+  background-image:
     radial-gradient(ellipse at 30% 50%, rgba(201, 169, 110, 0.06) 0%, transparent 60%),
     radial-gradient(ellipse at 70% 70%, rgba(201, 169, 110, 0.04) 0%, transparent 50%);
-  pointer-events: none;
+  background-attachment: fixed;
+  background-size: cover;
 }
 .hero-content { position: relative; z-index: 1; }
 .hero h1 {
@@ -126,6 +125,45 @@ section { padding: 6rem 1.5rem; }
   color: var(--accent-dim);
 }
 
+/* ── PARALLAX DIVIDERS ── */
+.parallax-band {
+  height: 320px;
+  position: relative;
+  overflow: hidden;
+  /* fallback colour while image loads */
+  background-color: #0e0c0a;
+}
+.parallax-band__inner {
+  position: absolute;
+  inset: -30% 0;          /* oversized so the offset never reveals edges */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  will-change: transform;  /* promotes to compositor layer */
+}
+/* tinted dark overlay so the bands stay moody */
+.parallax-band__inner::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: rgba(18, 14, 10, 0.62);
+}
+/* individual background images */
+.parallax-band--workshop .parallax-band__inner {
+  background-image: url('https://ryerguitars.com/wp-content/uploads/2015/09/luthier.jpg');
+  filter: grayscale(30%) contrast(1.1);
+}
+.parallax-band--guitars .parallax-band__inner {
+  background-image: url('https://ryerguitars.com/wp-content/uploads/2017/02/Dreadnought-1-270x405.jpg');
+  filter: grayscale(30%) contrast(1.1);
+}
+/* disable parallax motion on mobile — fixed/transform parallax causes jank on iOS */
+@media (max-width: 768px) {
+  .parallax-band { height: 200px; }
+  .parallax-band__inner { inset: 0; }
+  .parallax-band--workshop .parallax-band__inner,
+  .parallax-band--guitars .parallax-band__inner { background-attachment: scroll; }
+}
+
 /* ── ABOUT ── */
 .about { background: var(--bg-warm); }
 .about-content {
@@ -141,6 +179,8 @@ section { padding: 6rem 1.5rem; }
   width: 100%; aspect-ratio: 3/4; object-fit: cover;
   filter: grayscale(20%) contrast(1.05);
   border: 1px solid rgba(201, 169, 110, 0.15);
+  /* reserve space before image loads → prevents CLS */
+  background: var(--bg-card);
 }
 @media (max-width: 768px) {
   .about-content { grid-template-columns: 1fr; }
@@ -163,6 +203,8 @@ section { padding: 6rem 1.5rem; }
 .model-card img {
   width: 100%; aspect-ratio: 2/3; object-fit: cover;
   display: block; transition: transform 0.6s ease;
+  /* colour placeholder eliminates pop-in shift */
+  background: var(--bg-card);
 }
 .model-card:hover img { transform: scale(1.03); }
 .model-card .card-label {
@@ -190,22 +232,6 @@ section { padding: 6rem 1.5rem; }
   border-bottom: 1px solid rgba(201, 169, 110, 0.06);
 }
 @media (max-width: 600px) { .spec-columns { grid-template-columns: 1fr; } }
-
-/* ── COURSES ── */
-.course-card {
-  background: var(--bg-card);
-  border: 1px solid rgba(201, 169, 110, 0.1);
-  padding: 2.5rem; margin-bottom: 2rem;
-}
-.course-card h3 {
-  font-family: var(--serif); font-size: 1.6rem; font-weight: 300;
-  color: var(--cream); margin-bottom: 0.5rem;
-}
-.course-card .course-price {
-  font-family: var(--serif); font-size: 1.2rem;
-  color: var(--accent); margin-bottom: 1.5rem;
-}
-.course-card p { color: var(--cream-dim); font-size: 0.92rem; }
 
 /* ── CONTACT ── */
 .contact { text-align: center; }
@@ -280,6 +306,11 @@ footer {
   </div>
 </section>
 
+<!-- PARALLAX DIVIDER 1 — workshop -->
+<div class="parallax-band parallax-band--workshop" aria-hidden="true">
+  <div class="parallax-band__inner" data-parallax-speed="0.35"></div>
+</div>
+
 <!-- ABOUT -->
 <section class="about" id="about">
   <div class="container fade-in">
@@ -291,10 +322,21 @@ footer {
         <p>Whether it be a classical, flamenco or steel stringed instrument, each will be unique, designed and built according to the desires of the player. Together, we will build a meticulously handcrafted instrument using the finest tone woods and the very best techniques to ensure every client's experience exceeds their expectations. On occasion, Dave is also open to working one-on-one with serious students who wish to learn the craft — just reach out directly to discuss.</p>
         <p class="signature">— David Ryer</p>
       </div>
-      <img class="about-img" src="https://ryerguitars.com/wp-content/uploads/2015/09/luthier.jpg" alt="Dave Ryer in the workshop" loading="lazy">
+      <!-- fetchpriority=high: first meaningful image, above fold on most viewports -->
+      <img class="about-img"
+           src="https://ryerguitars.com/wp-content/uploads/2015/09/luthier.jpg"
+           alt="Dave Ryer in the workshop"
+           width="600" height="800"
+           fetchpriority="high"
+           decoding="async">
     </div>
   </div>
 </section>
+
+<!-- PARALLAX DIVIDER 2 — guitars -->
+<div class="parallax-band parallax-band--guitars" aria-hidden="true">
+  <div class="parallax-band__inner" data-parallax-speed="0.3"></div>
+</div>
 
 <!-- MODELS -->
 <section class="models" id="models">
@@ -303,31 +345,38 @@ footer {
     <p style="color: var(--cream-dim); max-width: 600px; margin-bottom: 1rem; font-size: 0.95rem;">Every Ryer guitar is meticulously hand crafted. Whether you are a seasoned veteran or just looking for a great sounding, high quality guitar, Dave is always up for talking shop.</p>
     <div class="models-grid">
       <div class="model-card">
-        <img src="https://ryerguitars.com/wp-content/uploads/2017/02/Dreadnought-1-270x405.jpg" alt="Ryer Dreadnought" loading="lazy">
+        <img src="https://ryerguitars.com/wp-content/uploads/2017/02/Dreadnought-1-270x405.jpg"
+             alt="Ryer Dreadnought" width="270" height="405" loading="lazy" decoding="async">
         <div class="card-label">Dreadnought</div>
       </div>
       <div class="model-card">
-        <img src="https://ryerguitars.com/wp-content/uploads/2015/09/front_jumbo1.jpg" alt="Ryer Jumbo" loading="lazy">
+        <img src="https://ryerguitars.com/wp-content/uploads/2015/09/front_jumbo1.jpg"
+             alt="Ryer Jumbo" width="270" height="405" loading="lazy" decoding="async">
         <div class="card-label">Jumbo</div>
       </div>
       <div class="model-card">
-        <img src="https://ryerguitars.com/wp-content/uploads/2017/08/Classical-Front.jpg" alt="Ryer Classical / Flamenco" loading="lazy">
+        <img src="https://ryerguitars.com/wp-content/uploads/2017/08/Classical-Front.jpg"
+             alt="Ryer Classical / Flamenco" width="270" height="405" loading="lazy" decoding="async">
         <div class="card-label">Classical / Flamenco</div>
       </div>
       <div class="model-card">
-        <img src="https://ryerguitars.com/wp-content/uploads/2015/09/ryer_mandolin.jpg" alt="Ryer Mandolin" loading="lazy">
+        <img src="https://ryerguitars.com/wp-content/uploads/2015/09/ryer_mandolin.jpg"
+             alt="Ryer Mandolin" width="270" height="405" loading="lazy" decoding="async">
         <div class="card-label">Mandolin</div>
       </div>
       <div class="model-card">
-        <img src="https://ryerguitars.com/wp-content/uploads/2017/06/OOFron.1t-270x405.jpg" alt="Ryer OO" loading="lazy">
+        <img src="https://ryerguitars.com/wp-content/uploads/2017/06/OOFron.1t-270x405.jpg"
+             alt="Ryer OO" width="270" height="405" loading="lazy" decoding="async">
         <div class="card-label">OO</div>
       </div>
       <div class="model-card">
-        <img src="https://ryerguitars.com/wp-content/uploads/2017/02/OM20-270x405.jpg" alt="Ryer OM" loading="lazy">
+        <img src="https://ryerguitars.com/wp-content/uploads/2017/02/OM20-270x405.jpg"
+             alt="Ryer OM" width="270" height="405" loading="lazy" decoding="async">
         <div class="card-label">OM</div>
       </div>
       <div class="model-card">
-        <img src="https://ryerguitars.com/wp-content/uploads/2017/08/SSSFront1-270x405.jpg" alt="Ryer Standard Steel String" loading="lazy">
+        <img src="https://ryerguitars.com/wp-content/uploads/2017/08/SSSFront1-270x405.jpg"
+             alt="Ryer Standard Steel String" width="270" height="405" loading="lazy" decoding="async">
         <div class="card-label">Standard Steel String</div>
       </div>
     </div>
@@ -402,6 +451,42 @@ const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.15 });
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// ── PARALLAX BANDS ──
+// Skips on mobile (matchMedia) and respects prefers-reduced-motion
+(function () {
+  const mq       = window.matchMedia('(max-width: 768px)');
+  const reduced  = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (mq.matches || reduced.matches) return;
+
+  const bands = Array.from(document.querySelectorAll('.parallax-band__inner'));
+  let ticking = false;
+
+  function updateParallax() {
+    const scrollY = window.scrollY;
+    bands.forEach(function (inner) {
+      const band   = inner.parentElement;
+      const rect   = band.getBoundingClientRect();
+      // Only move when the band is near the viewport
+      if (rect.bottom < -200 || rect.top > window.innerHeight + 200) return;
+      const speed  = parseFloat(inner.dataset.parallaxSpeed) || 0.3;
+      // offsetFromCenter: 0 when band is centred in viewport
+      const centre = rect.top + rect.height / 2 - window.innerHeight / 2;
+      const offset = centre * speed;
+      inner.style.transform = 'translateY(' + offset + 'px)';
+    });
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', function () {
+    if (!ticking) {
+      requestAnimationFrame(updateParallax);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  updateParallax(); // initial position
+}());
 </script>
 </body>
 </html>
