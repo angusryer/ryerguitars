@@ -37,18 +37,31 @@ document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
 
 // Hero parallax
 (function () {
-  const mq      = window.matchMedia('(max-width: 900px)');
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-  if (mq.matches || reduced.matches) return;
+  if (reduced.matches) return;
 
   const heroBg = document.querySelector('.hero__bg') as HTMLElement | null;
-  if (!heroBg) return;
-  const speed  = parseFloat(heroBg.dataset.parallaxSpeed ?? '0.25') || 0.25;
-  let ticking  = false;
+  const hero   = document.querySelector('.hero') as HTMLElement | null;
+  if (!heroBg || !hero) return;
+
+  const speed = parseFloat(heroBg.dataset.parallaxSpeed ?? '0.25') || 0.25;
+  const mq    = window.matchMedia('(max-width: 900px)');
+  let ticking = false;
+  let enabled = !mq.matches;
+
+  // Re-evaluate on resize
+  mq.addEventListener('change', (e) => {
+    enabled = !e.matches;
+    if (!enabled) heroBg.style.transform = '';
+  });
 
   function update() {
-    heroBg!.style.transform = `translateY(${window.scrollY * speed}px)`;
     ticking = false;
+    if (!enabled) return;
+    // Only apply while hero is in view
+    const bottom = hero!.getBoundingClientRect().bottom;
+    if (bottom < 0) return;
+    heroBg.style.transform = `translateY(${window.scrollY * speed}px)`;
   }
 
   window.addEventListener('scroll', () => {
