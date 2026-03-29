@@ -199,41 +199,31 @@ section { padding: 6rem 1.5rem; }
   }
 }
 
-/* ── MODELS ── */
-.models-grid {
+/* ── GALLERY ── */
+.gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 260px));
-  justify-content: start;
-  gap: 1.5rem; margin-top: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.75rem; margin-top: 2rem;
 }
-.model-card {
-  cursor: default;
+.gallery-card {
+  overflow: hidden;
+  aspect-ratio: 3/4;
   background: var(--bg-card);
   border: 1px solid rgba(201, 169, 110, 0.08);
   transition: border-color 0.4s;
 }
-.model-card:hover { border-color: rgba(201, 169, 110, 0.25); }
-/* overflow:hidden scoped to the image wrapper only so the label is never clipped */
-.model-card .img-wrap {
-  overflow: hidden;
-  aspect-ratio: 3/4;
-}
-.model-card img {
+.gallery-card:hover { border-color: rgba(201, 169, 110, 0.3); }
+.gallery-card img {
   width: 100%; height: 100%; object-fit: cover;
   display: block; transition: transform 0.6s ease;
   background: var(--bg-card);
 }
-.model-card:hover img { transform: scale(1.03); }
-.model-card .card-label {
-  padding: 1rem; text-align: center;
-  font-family: var(--serif); font-size: 1.1rem;
-  letter-spacing: 0.06em; color: var(--cream);
-}
-/* mobile only: single full-width centred column */
+.gallery-card:hover img { transform: scale(1.04); }
+/* mobile: 2-column grid, full width */
 @media (max-width: 540px) {
-  .models-grid {
-    grid-template-columns: 1fr;
-    justify-content: stretch;
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
   }
 }
 
@@ -244,7 +234,6 @@ section { padding: 6rem 1.5rem; }
   color: var(--accent); margin: 1.5rem 0 2rem;
   font-weight: 300;
 }
-.spec-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
 .spec-group h3 {
   font-family: var(--serif); font-size: 1rem; font-weight: 400;
   color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase;
@@ -255,7 +244,7 @@ section { padding: 6rem 1.5rem; }
   color: var(--cream-dim); font-size: 0.88rem; padding: 0.3rem 0;
   border-bottom: 1px solid rgba(201, 169, 110, 0.06);
 }
-@media (max-width: 768px) { .spec-columns { grid-template-columns: 1fr; } }
+.spec-group { margin-top: 2rem; max-width: 480px; }
 
 /* ── CONTACT ── */
 .contact { text-align: center; }
@@ -316,7 +305,7 @@ footer {
     <ul class="nav-links" id="nav-links">
       <li><a href="#home" onclick="closeNav()">Home</a></li>
       <li><a href="#about" onclick="closeNav()">About</a></li>
-      <li><a href="#models" onclick="closeNav()">Models</a></li>
+      <li><a href="#models" onclick="closeNav()">Gallery</a></li>
       <li><a href="#custom" onclick="closeNav()">Custom Builds</a></li>
       <li><a href="#contact" onclick="closeNav()">Contact</a></li>
     </ul>
@@ -390,60 +379,46 @@ footer {
   </svg>
 </div>
 
-<!-- MODELS -->
+<!-- GALLERY -->
 <section class="models" id="models">
   <div class="container fade-in">
-    <div class="section-label">Standard Models</div>
-    <p style="color: var(--cream-dim); max-width: 600px; margin-bottom: 1rem; font-size: 0.95rem;">Every Ryer guitar is meticulously hand crafted. Whether you are a seasoned veteran or just looking for a great sounding, high quality guitar, Dave is always up for talking shop.</p>
-    <div class="models-grid">
-      <div class="model-card">
-        <div class="img-wrap">
-          <img src="images/ryer-lg/ryer-lg-100.jpg"
-               alt="Ryer Dreadnought" width="1600" height="2400" loading="lazy" decoding="async">
-        </div>
-        <div class="card-label">Dreadnought</div>
+    <div class="section-label">Gallery</div>
+    <div class="gallery-grid">
+      <div class="gallery-card">
+        <img src="images/ryer-lg/ryer-lg-100.jpg" alt="Ryer Guitar" width="1600" height="2400" loading="lazy" decoding="async">
       </div>
-      <div class="model-card">
-        <div class="img-wrap">
-          <img src="images/ryer-lg/ryer-lg-108.jpg"
-               alt="Ryer Jumbo" width="1600" height="2400" loading="lazy" decoding="async">
-        </div>
-        <div class="card-label">Jumbo</div>
+      <div class="gallery-card">
+        <img src="images/ryer-lg/ryer-lg-104.jpg" alt="Ryer Guitar" width="1600" height="2400" loading="lazy" decoding="async">
       </div>
-      <div class="model-card">
-        <div class="img-wrap">
-          <img src="images/ryer-lg/ryer-lg-116.jpg"
-               alt="Ryer Classical / Flamenco" width="1600" height="2400" loading="lazy" decoding="async">
-        </div>
-        <div class="card-label">Classical / Flamenco</div>
+      <div class="gallery-card">
+        <img src="images/ryer-lg/ryer-lg-108.jpg" alt="Ryer Guitar" width="1600" height="2400" loading="lazy" decoding="async">
       </div>
-      <div class="model-card">
-        <div class="img-wrap">
-          <img src="images/ryer-lg/ryer-lg-124.jpg"
-               alt="Ryer Mandolin" width="1600" height="2400" loading="lazy" decoding="async">
-        </div>
-        <div class="card-label">Mandolin</div>
+      <div class="gallery-card">
+        <img src="images/ryer-lg/ryer-lg-112.jpg" alt="Ryer Guitar" width="1600" height="2400" loading="lazy" decoding="async">
       </div>
-      <div class="model-card">
-        <div class="img-wrap">
-          <img src="images/ryer-lg/ryer-lg-132.jpg"
-               alt="Ryer OO" width="1600" height="2400" loading="lazy" decoding="async">
-        </div>
-        <div class="card-label">OO</div>
+      <div class="gallery-card">
+        <img src="images/ryer-lg/ryer-lg-116.jpg" alt="Ryer Guitar" width="1600" height="2400" loading="lazy" decoding="async">
       </div>
-      <div class="model-card">
-        <div class="img-wrap">
-          <img src="images/ryer-lg/ryer-lg-140.jpg"
-               alt="Ryer OM" width="1600" height="2400" loading="lazy" decoding="async">
-        </div>
-        <div class="card-label">OM</div>
+      <div class="gallery-card">
+        <img src="images/ryer-lg/ryer-lg-120.jpg" alt="Ryer Guitar" width="1600" height="2400" loading="lazy" decoding="async">
       </div>
-      <div class="model-card">
-        <div class="img-wrap">
-          <img src="images/ryer-lg/ryer-lg-148.jpg"
-               alt="Ryer Standard Steel String" width="1600" height="2400" loading="lazy" decoding="async">
-        </div>
-        <div class="card-label">Standard Steel String</div>
+      <div class="gallery-card">
+        <img src="images/ryer-lg/ryer-lg-124.jpg" alt="Ryer Guitar" width="1600" height="2400" loading="lazy" decoding="async">
+      </div>
+      <div class="gallery-card">
+        <img src="images/ryer-lg/ryer-lg-128.jpg" alt="Ryer Guitar" width="1600" height="2400" loading="lazy" decoding="async">
+      </div>
+      <div class="gallery-card">
+        <img src="images/ryer-lg/ryer-lg-132.jpg" alt="Ryer Guitar" width="1600" height="2400" loading="lazy" decoding="async">
+      </div>
+      <div class="gallery-card">
+        <img src="images/ryer-lg/ryer-lg-136.jpg" alt="Ryer Guitar" width="1600" height="2400" loading="lazy" decoding="async">
+      </div>
+      <div class="gallery-card">
+        <img src="images/ryer-lg/ryer-lg-140.jpg" alt="Ryer Guitar" width="1600" height="2400" loading="lazy" decoding="async">
+      </div>
+      <div class="gallery-card">
+        <img src="images/ryer-lg/ryer-lg-144.jpg" alt="Ryer Guitar" width="1600" height="2400" loading="lazy" decoding="async">
       </div>
     </div>
   </div>
@@ -468,37 +443,21 @@ footer {
   <div class="container fade-in">
     <div class="section-label">Custom Builds</div>
     <p style="color: var(--cream-dim); font-size: 0.95rem;">Each instrument is designed and built according to the desires of the player. A 20% non-refundable deposit is required to confirm orders.</p>
-    <div class="price-block">Starting at $8,500 <span style="font-size: 0.9rem; color: var(--cream-dim);">+ tax</span></div>
+    <div class="price-block">$8,700 base price <span style="font-size: 0.9rem; color: var(--cream-dim);">+ options &amp; tax</span></div>
 
-    <div class="spec-columns">
-      <div class="spec-group">
-        <h3>Standard Specs</h3>
-        <ul>
-          <li>Tops — Sitka Spruce, Lutz Spruce, Engelmann, Cedar</li>
-          <li>Backs &amp; Sides — Indian Rosewood or Mahogany</li>
-          <li>Neck — Mahogany, Spanish Cedar</li>
-          <li>Bridge — Rosewood or Ebony</li>
-          <li>Fingerboard — Rosewood or Ebony</li>
-          <li>Scale Length — 61 to 65 cm</li>
-          <li>Tuners — Gotoh 510's or Schertler</li>
-          <li>Nut &amp; Saddle — Bone</li>
-          <li>Finish — French polish or Poly</li>
-        </ul>
-      </div>
-      <div class="spec-group">
-        <h3>Available Options</h3>
-        <ul>
-          <li>Single cutaway</li>
-          <li>Arm relief / Arm rest (Classical)</li>
-          <li>Chest relief</li>
-          <li>Double top</li>
-          <li>Side sound port</li>
-          <li>Left handed</li>
-          <li>K&amp;K Pick-up</li>
-          <li>Snakewood binding, bridge, fingerboard</li>
-          <li>Custom inlay work</li>
-        </ul>
-      </div>
+    <div class="spec-group">
+      <h3>Standard Specs</h3>
+      <ul>
+        <li>Tops — Sitka Spruce, Lutz Spruce, Engelmann, Cedar</li>
+        <li>Backs &amp; Sides — Indian Rosewood or Mahogany</li>
+        <li>Neck — Mahogany, Spanish Cedar</li>
+        <li>Bridge — Rosewood or Ebony</li>
+        <li>Fingerboard — Rosewood or Ebony</li>
+        <li>Scale Length — 61 to 65 cm</li>
+        <li>Tuners — Gotoh 510's or Schertler</li>
+        <li>Nut &amp; Saddle — Bone</li>
+        <li>Finish — French polish or Poly</li>
+      </ul>
     </div>
   </div>
 </section>
