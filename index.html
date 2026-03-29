@@ -91,6 +91,17 @@ section { padding: 6rem 1.5rem; }
   color: var(--accent); margin-bottom: 2rem;
 }
 
+/* ── ORNATE DIVIDER ── */
+.ornate-divider {
+  display: flex; align-items: center; justify-content: center;
+  padding: 1.5rem 1.5rem;
+  overflow: hidden;
+}
+.ornate-divider svg {
+  width: 100%; max-width: 700px;
+  height: 24px; overflow: visible;
+}
+
 /* ── HERO ── */
 .hero {
   min-height: 100vh; display: flex; align-items: center; justify-content: center;
@@ -123,7 +134,6 @@ section { padding: 6rem 1.5rem; }
     radial-gradient(ellipse at 70% 70%, rgba(201, 169, 110, 0.05) 0%, transparent 50%);
   z-index: 1;
 }
-/* disable parallax on mobile/reduced-motion — use simple fixed cover instead */
 @media (max-width: 900px) {
   .hero__bg { inset: 0; }
 }
@@ -149,48 +159,15 @@ section { padding: 6rem 1.5rem; }
   color: var(--accent-dim);
 }
 
-/* ── PARALLAX DIVIDERS ── */
-.parallax-band {
-  height: 320px;
-  position: relative;
-  overflow: hidden;
-  /* fallback colour while image loads */
-  background-color: #0e0c0a;
-}
-.parallax-band__inner {
-  position: absolute;
-  inset: -30% 0;          /* oversized so the offset never reveals edges */
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  will-change: transform;  /* promotes to compositor layer */
-}
-/* tinted dark overlay so the bands stay moody */
-.parallax-band__inner::after {
-  content: '';
-  position: absolute; inset: 0;
-  background: rgba(18, 14, 10, 0.62);
-}
-/* individual background images */
-.parallax-band--workshop .parallax-band__inner {
-  background-image: url('images/bw-ebony-lg/bw-ebony-lg-10.jpg');
-}
-.parallax-band--guitars .parallax-band__inner {
-  background-image: url('images/bw-ebony-lg/bw-ebony-lg-13.jpg');
-}
-/* disable parallax motion on mobile/tablet — fixed/transform parallax causes jank on iOS */
-@media (max-width: 900px) {
-  .parallax-band { height: 200px; }
-  .parallax-band__inner { inset: 0; }
-  .parallax-band--workshop .parallax-band__inner,
-  .parallax-band--guitars .parallax-band__inner { background-attachment: scroll; }
-}
-
 /* ── ABOUT ── */
 .about { background: var(--bg-warm); }
 .about-content {
   display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
-  align-items: start;
+  /* stretch makes both columns equal height so image fills the text height */
+  align-items: stretch;
+}
+.about-text {
+  display: flex; flex-direction: column; justify-content: center;
 }
 .about-text p { margin-bottom: 1.2rem; color: var(--cream-dim); font-size: 0.95rem; }
 .about-text .signature {
@@ -198,26 +175,32 @@ section { padding: 6rem 1.5rem; }
   color: var(--accent); font-size: 1.1rem; margin-top: 2rem;
 }
 .about-img {
-  width: 100%; aspect-ratio: 3/4; object-fit: cover;
+  width: 100%; height: 100%; object-fit: cover;
   filter: grayscale(20%) contrast(1.05);
   border: 1px solid rgba(201, 169, 110, 0.15);
-  /* reserve space before image loads → prevents CLS */
   background: var(--bg-card);
+  display: block;
+  /* min-height prevents a tiny image if text is very short */
+  min-height: 300px;
 }
-/* at tablet widths give more space to the text column and tighten the image */
+/* tablet: wider text column, shorter image ratio */
 @media (max-width: 1024px) and (min-width: 901px) {
   .about-content { grid-template-columns: 1.3fr 0.7fr; gap: 2rem; }
-  .about-img { aspect-ratio: 4/5; }
 }
+/* column mode: image is full-width and roughly square */
 @media (max-width: 900px) {
   .about-content { grid-template-columns: 1fr; }
-  .about-img { max-width: 400px; margin: 0 auto; display: block; }
+  .about-img {
+    height: auto;
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    min-height: unset;
+  }
 }
 
 /* ── MODELS ── */
 .models-grid {
   display: grid;
-  /* max card width prevents the lone last card from stretching full-width */
   grid-template-columns: repeat(auto-fill, minmax(220px, 260px));
   justify-content: start;
   gap: 1.5rem; margin-top: 2rem;
@@ -232,7 +215,6 @@ section { padding: 6rem 1.5rem; }
 .model-card img {
   width: 100%; aspect-ratio: 2/3; object-fit: cover;
   display: block; transition: transform 0.6s ease;
-  /* colour placeholder eliminates pop-in shift */
   background: var(--bg-card);
 }
 .model-card:hover img { transform: scale(1.03); }
@@ -299,7 +281,6 @@ footer {
 }
 
 /* ── ANIMATIONS ── */
-/* only animate when motion is acceptable; content is always visible otherwise */
 @media (prefers-reduced-motion: no-preference) {
   .fade-in {
     opacity: 0; transform: translateY(20px);
@@ -340,9 +321,25 @@ footer {
   </div>
 </section>
 
-<!-- PARALLAX DIVIDER 1 — workshop -->
-<div class="parallax-band parallax-band--workshop" aria-hidden="true">
-  <div class="parallax-band__inner" data-parallax-speed="0.35"></div>
+<!-- ORNATE DIVIDER -->
+<div class="ornate-divider" aria-hidden="true">
+  <svg viewBox="0 0 700 24" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+    <!-- left arm: gentle curve rising to centre diamond -->
+    <path d="M 0 12 Q 120 12 160 12 Q 200 12 210 8 Q 220 4 230 4 Q 240 4 248 8 L 254 11" stroke="#c9a96e" stroke-width="1.5" stroke-opacity="0.55" fill="none"/>
+    <!-- left inner flourish -->
+    <path d="M 254 11 Q 258 8 262 6 Q 266 4 270 6 Q 274 8 276 10" stroke="#c9a96e" stroke-width="1" stroke-opacity="0.4" fill="none"/>
+    <!-- centre diamond -->
+    <polygon points="350,5 361,12 350,19 339,12" stroke="#c9a96e" stroke-width="1.5" stroke-opacity="0.75" fill="none"/>
+    <!-- centre dot -->
+    <circle cx="350" cy="12" r="2" fill="#c9a96e" fill-opacity="0.6"/>
+    <!-- right inner flourish (mirror) -->
+    <path d="M 424 10 Q 426 8 430 6 Q 434 4 438 6 Q 442 8 446 11" stroke="#c9a96e" stroke-width="1" stroke-opacity="0.4" fill="none"/>
+    <!-- right arm (mirror) -->
+    <path d="M 446 11 L 452 8 Q 460 4 470 4 Q 480 4 490 8 Q 500 12 540 12 Q 580 12 700 12" stroke="#c9a96e" stroke-width="1.5" stroke-opacity="0.55" fill="none"/>
+    <!-- small accent dots flanking the diamond -->
+    <circle cx="322" cy="12" r="1.5" fill="#c9a96e" fill-opacity="0.4"/>
+    <circle cx="378" cy="12" r="1.5" fill="#c9a96e" fill-opacity="0.4"/>
+  </svg>
 </div>
 
 <!-- ABOUT -->
@@ -356,7 +353,6 @@ footer {
         <p>Whether it be a classical, flamenco or steel stringed instrument, each will be unique, designed and built according to the desires of the player. Together, we will build a meticulously handcrafted instrument using the finest tone woods and the very best techniques to ensure every client's experience exceeds their expectations. On occasion, Dave is also open to working one-on-one with serious students who wish to learn the craft — just reach out directly to discuss.</p>
         <p class="signature">— David Ryer</p>
       </div>
-      <!-- fetchpriority=high: first meaningful image, above fold on most viewports -->
       <img class="about-img"
            src="images/bw-ebony-lg/bw-ebony-lg-11.jpg"
            alt="Dave Ryer in the workshop"
@@ -367,9 +363,18 @@ footer {
   </div>
 </section>
 
-<!-- PARALLAX DIVIDER 2 — guitars -->
-<div class="parallax-band parallax-band--guitars" aria-hidden="true">
-  <div class="parallax-band__inner" data-parallax-speed="0.3"></div>
+<!-- ORNATE DIVIDER -->
+<div class="ornate-divider" aria-hidden="true">
+  <svg viewBox="0 0 700 24" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+    <path d="M 0 12 Q 120 12 160 12 Q 200 12 210 8 Q 220 4 230 4 Q 240 4 248 8 L 254 11" stroke="#c9a96e" stroke-width="1.5" stroke-opacity="0.55" fill="none"/>
+    <path d="M 254 11 Q 258 8 262 6 Q 266 4 270 6 Q 274 8 276 10" stroke="#c9a96e" stroke-width="1" stroke-opacity="0.4" fill="none"/>
+    <polygon points="350,5 361,12 350,19 339,12" stroke="#c9a96e" stroke-width="1.5" stroke-opacity="0.75" fill="none"/>
+    <circle cx="350" cy="12" r="2" fill="#c9a96e" fill-opacity="0.6"/>
+    <path d="M 424 10 Q 426 8 430 6 Q 434 4 438 6 Q 442 8 446 11" stroke="#c9a96e" stroke-width="1" stroke-opacity="0.4" fill="none"/>
+    <path d="M 446 11 L 452 8 Q 460 4 470 4 Q 480 4 490 8 Q 500 12 540 12 Q 580 12 700 12" stroke="#c9a96e" stroke-width="1.5" stroke-opacity="0.55" fill="none"/>
+    <circle cx="322" cy="12" r="1.5" fill="#c9a96e" fill-opacity="0.4"/>
+    <circle cx="378" cy="12" r="1.5" fill="#c9a96e" fill-opacity="0.4"/>
+  </svg>
 </div>
 
 <!-- MODELS -->
@@ -416,6 +421,20 @@ footer {
     </div>
   </div>
 </section>
+
+<!-- ORNATE DIVIDER -->
+<div class="ornate-divider" aria-hidden="true">
+  <svg viewBox="0 0 700 24" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+    <path d="M 0 12 Q 120 12 160 12 Q 200 12 210 8 Q 220 4 230 4 Q 240 4 248 8 L 254 11" stroke="#c9a96e" stroke-width="1.5" stroke-opacity="0.55" fill="none"/>
+    <path d="M 254 11 Q 258 8 262 6 Q 266 4 270 6 Q 274 8 276 10" stroke="#c9a96e" stroke-width="1" stroke-opacity="0.4" fill="none"/>
+    <polygon points="350,5 361,12 350,19 339,12" stroke="#c9a96e" stroke-width="1.5" stroke-opacity="0.75" fill="none"/>
+    <circle cx="350" cy="12" r="2" fill="#c9a96e" fill-opacity="0.6"/>
+    <path d="M 424 10 Q 426 8 430 6 Q 434 4 438 6 Q 442 8 446 11" stroke="#c9a96e" stroke-width="1" stroke-opacity="0.4" fill="none"/>
+    <path d="M 446 11 L 452 8 Q 460 4 470 4 Q 480 4 490 8 Q 500 12 540 12 Q 580 12 700 12" stroke="#c9a96e" stroke-width="1.5" stroke-opacity="0.55" fill="none"/>
+    <circle cx="322" cy="12" r="1.5" fill="#c9a96e" fill-opacity="0.4"/>
+    <circle cx="378" cy="12" r="1.5" fill="#c9a96e" fill-opacity="0.4"/>
+  </svg>
+</div>
 
 <!-- CUSTOM BUILDS -->
 <section class="custom" id="custom">
@@ -481,45 +500,39 @@ function closeNav() {
 }
 
 // Fade-in on scroll
+// rootMargin fires the observer 60px before the element enters the viewport
+// threshold:0 means trigger as soon as any pixel is visible
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.15 });
+}, { threshold: 0, rootMargin: '0px 0px -60px 0px' });
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-// ── PARALLAX BANDS ──
-// Skips on mobile (matchMedia) and respects prefers-reduced-motion
+// ── HERO PARALLAX ──
 (function () {
-  const mq       = window.matchMedia('(max-width: 900px)');
-  const reduced  = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const mq      = window.matchMedia('(max-width: 900px)');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   if (mq.matches || reduced.matches) return;
 
-  const bands = Array.from(document.querySelectorAll('.parallax-band__inner, .hero__bg'));
-  let ticking = false;
+  const heroBg  = document.querySelector('.hero__bg');
+  if (!heroBg) return;
+  let ticking   = false;
 
   function updateParallax() {
     const scrollY = window.scrollY;
-    bands.forEach(function (inner) {
-      const band   = inner.parentElement;
-      const rect   = band.getBoundingClientRect();
-      // Only move when the band is near the viewport
-      if (rect.bottom < -200 || rect.top > window.innerHeight + 200) return;
-      const speed  = parseFloat(inner.dataset.parallaxSpeed) || 0.3;
-      // offsetFromCenter: 0 when band is centred in viewport
-      const centre = rect.top + rect.height / 2 - window.innerHeight / 2;
-      const offset = centre * speed;
-      inner.style.transform = 'translateY(' + offset + 'px)';
-    });
+    const hero    = heroBg.parentElement;
+    const rect    = hero.getBoundingClientRect();
+    if (rect.bottom < -200 || rect.top > window.innerHeight + 200) { ticking = false; return; }
+    const speed   = parseFloat(heroBg.dataset.parallaxSpeed) || 0.25;
+    const centre  = rect.top + rect.height / 2 - window.innerHeight / 2;
+    heroBg.style.transform = 'translateY(' + (centre * speed) + 'px)';
     ticking = false;
   }
 
   window.addEventListener('scroll', function () {
-    if (!ticking) {
-      requestAnimationFrame(updateParallax);
-      ticking = true;
-    }
+    if (!ticking) { requestAnimationFrame(updateParallax); ticking = true; }
   }, { passive: true });
 
-  updateParallax(); // initial position
+  updateParallax();
 }());
 </script>
 </body>
