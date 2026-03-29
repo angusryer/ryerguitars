@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ryer Guitars — Handcrafted Acoustic Instruments</title>
+<meta name="description" content="Custom handcrafted acoustic and classical guitars by luthier Dave Ryer. Built with uncompromising standards in Madoc, Ontario.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Libre+Franklin:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #1a1714;
+  --bg-warm: #211e19;
+  --bg-card: #2a2520;
+  --cream: #e8e0d4;
+  --cream-dim: #b0a696;
+  --accent: #c9a96e;
+  --accent-dim: #a6894f;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Libre Franklin', system-ui, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--cream);
+  font-family: var(--sans);
+  font-weight: 300;
+  line-height: 1.7;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(26, 23, 20, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(201, 169, 110, 0.1);
+  transition: background 0.3s;
+}
+.nav-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.9rem 1.5rem;
+}
+.nav-brand {
+  font-family: var(--serif); font-size: 1.25rem; font-weight: 300;
+  color: var(--cream); text-decoration: none; letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.nav-brand span { color: var(--accent); }
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a {
+  color: var(--cream-dim); text-decoration: none;
+  font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+  font-weight: 400; transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--accent); }
+
+.nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; }
+.nav-toggle span {
+  display: block; width: 22px; height: 1.5px; background: var(--cream);
+  margin: 5px 0; transition: all 0.3s;
+}
+
+@media (max-width: 768px) {
+  .nav-toggle { display: block; }
+  .nav-links {
+    display: none; flex-direction: column; gap: 0;
+    position: absolute; top: 100%; left: 0; right: 0;
+    background: rgba(26, 23, 20, 0.97);
+    border-bottom: 1px solid rgba(201, 169, 110, 0.1);
+  }
+  .nav-links.open { display: flex; }
+  .nav-links a { display: block; padding: 1rem 1.5rem; }
+}
+
+/* ── SECTIONS ── */
+section { padding: 6rem 1.5rem; }
+.container { max-width: 900px; margin: 0 auto; }
+
+.section-label {
+  font-family: var(--serif); font-size: 0.85rem;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 2rem;
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  text-align: center; padding-top: 5rem;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 50%, rgba(201, 169, 110, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 70%, rgba(201, 169, 110, 0.04) 0%, transparent 50%);
+  pointer-events: none;
+}
+.hero-content { position: relative; z-index: 1; }
+.hero h1 {
+  font-family: var(--serif); font-weight: 300;
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  line-height: 1.1; letter-spacing: 0.04em;
+  margin-bottom: 1.5rem; color: var(--cream);
+}
+.hero p {
+  font-size: 1rem; color: var(--cream-dim);
+  max-width: 480px; margin: 0 auto 2.5rem;
+  letter-spacing: 0.02em;
+}
+.hero-rule {
+  width: 60px; height: 1px; background: var(--accent);
+  margin: 0 auto 2rem; opacity: 0.6;
+}
+.hero-sub {
+  font-family: var(--serif); font-size: 0.85rem;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--accent-dim);
+}
+
+/* ── ABOUT ── */
+.about { background: var(--bg-warm); }
+.about-content {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+  align-items: start;
+}
+.about-text p { margin-bottom: 1.2rem; color: var(--cream-dim); font-size: 0.95rem; }
+.about-text .signature {
+  font-family: var(--serif); font-style: italic;
+  color: var(--accent); font-size: 1.1rem; margin-top: 2rem;
+}
+.about-img {
+  width: 100%; aspect-ratio: 3/4; object-fit: cover;
+  filter: grayscale(20%) contrast(1.05);
+  border: 1px solid rgba(201, 169, 110, 0.15);
+}
+@media (max-width: 768px) {
+  .about-content { grid-template-columns: 1fr; }
+  .about-img { max-width: 400px; margin: 0 auto; display: block; }
+}
+
+/* ── MODELS ── */
+.models-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem; margin-top: 2rem;
+}
+.model-card {
+  position: relative; overflow: hidden; cursor: default;
+  background: var(--bg-card);
+  border: 1px solid rgba(201, 169, 110, 0.08);
+  transition: border-color 0.4s;
+}
+.model-card:hover { border-color: rgba(201, 169, 110, 0.25); }
+.model-card img {
+  width: 100%; aspect-ratio: 2/3; object-fit: cover;
+  display: block; transition: transform 0.6s ease;
+}
+.model-card:hover img { transform: scale(1.03); }
+.model-card .card-label {
+  padding: 1rem; text-align: center;
+  font-family: var(--serif); font-size: 1.1rem;
+  letter-spacing: 0.06em; color: var(--cream);
+}
+
+/* ── CUSTOM BUILDS ── */
+.custom { background: var(--bg-warm); }
+.custom .price-block {
+  font-family: var(--serif); font-size: 1.8rem;
+  color: var(--accent); margin: 1.5rem 0 2rem;
+  font-weight: 300;
+}
+.spec-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
+.spec-group h3 {
+  font-family: var(--serif); font-size: 1rem; font-weight: 400;
+  color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase;
+  margin-bottom: 0.8rem;
+}
+.spec-group ul { list-style: none; }
+.spec-group li {
+  color: var(--cream-dim); font-size: 0.88rem; padding: 0.3rem 0;
+  border-bottom: 1px solid rgba(201, 169, 110, 0.06);
+}
+@media (max-width: 600px) { .spec-columns { grid-template-columns: 1fr; } }
+
+/* ── COURSES ── */
+.course-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(201, 169, 110, 0.1);
+  padding: 2.5rem; margin-bottom: 2rem;
+}
+.course-card h3 {
+  font-family: var(--serif); font-size: 1.6rem; font-weight: 300;
+  color: var(--cream); margin-bottom: 0.5rem;
+}
+.course-card .course-price {
+  font-family: var(--serif); font-size: 1.2rem;
+  color: var(--accent); margin-bottom: 1.5rem;
+}
+.course-card p { color: var(--cream-dim); font-size: 0.92rem; }
+
+/* ── CONTACT ── */
+.contact { text-align: center; }
+.contact-line {
+  margin: 1.2rem 0;
+  font-size: 1rem; color: var(--cream-dim);
+}
+.contact-line a {
+  color: var(--cream); text-decoration: none;
+  border-bottom: 1px solid rgba(201, 169, 110, 0.3);
+  transition: border-color 0.3s;
+}
+.contact-line a:hover { border-color: var(--accent); }
+.contact-phone {
+  font-family: var(--serif); font-size: 1.6rem;
+  color: var(--cream); letter-spacing: 0.05em;
+}
+.social-links { margin-top: 2.5rem; }
+.social-links a {
+  display: inline-block; color: var(--accent-dim);
+  font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase;
+  text-decoration: none; padding: 0.6rem 1.2rem;
+  border: 1px solid rgba(201, 169, 110, 0.2);
+  transition: all 0.3s;
+}
+.social-links a:hover {
+  color: var(--accent); border-color: var(--accent);
+}
+
+/* ── FOOTER ── */
+footer {
+  text-align: center; padding: 3rem 1.5rem;
+  font-size: 0.78rem; color: var(--cream-dim);
+  border-top: 1px solid rgba(201, 169, 110, 0.08);
+  letter-spacing: 0.05em;
+}
+
+/* ── ANIMATIONS ── */
+.fade-in {
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#home" class="nav-brand">Ryer <span>Guitars</span></a>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="#home" onclick="closeNav()">Home</a></li>
+      <li><a href="#about" onclick="closeNav()">About</a></li>
+      <li><a href="#models" onclick="closeNav()">Models</a></li>
+      <li><a href="#custom" onclick="closeNav()">Custom Builds</a></li>
+      <li><a href="#courses" onclick="closeNav()">Courses</a></li>
+      <li><a href="#contact" onclick="closeNav()">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <h1>Ryer Guitars</h1>
+    <div class="hero-rule"></div>
+    <p>Meticulously handcrafted acoustic and classical guitars, built with uncompromising standards.</p>
+    <span class="hero-sub">Madoc, Ontario</span>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="container fade-in">
+    <div class="section-label">About Dave</div>
+    <div class="about-content">
+      <div class="about-text">
+        <p>I have always had a deep appreciation for fine woodworking, especially as it applies to musical instruments. In the late 1980s, I repaired stringed instruments for local music shops and since the turn of the millennium, I have nurtured my soul while learning the art of crafting high quality, acoustic and classical guitars. I was fortunate to have acquired my initial training under Sergei de Jonge in 2000 and again worked with Sergei for over two years in his shop.</p>
+        <p>I came to realize that there is no better way to live than to do what I have the passion for. Art and the craft of building something so beautifully majestic, rich in detail, technologically advanced and yet, so simple. The guitar, in all of its various forms, has been around for eons — so widely recognized and appreciated the world over — and yet, there's still so much to learn, so many nuances that make each guitar uniquely personal.</p>
+        <p>Whether it be a classical, flamenco or steel stringed instrument, each will be unique, designed and built according to the desires of the player. Together, we will build a meticulously handcrafted instrument using the finest tone woods and the very best techniques to ensure every client's experience exceeds their expectations.</p>
+        <p class="signature">— David Ryer</p>
+      </div>
+      <img class="about-img" src="https://ryerguitars.com/wp-content/uploads/2015/09/luthier.jpg" alt="Dave Ryer in the workshop" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- MODELS -->
+<section class="models" id="models">
+  <div class="container fade-in">
+    <div class="section-label">Standard Models</div>
+    <p style="color: var(--cream-dim); max-width: 600px; margin-bottom: 1rem; font-size: 0.95rem;">Every Ryer guitar is meticulously hand crafted. Whether you are a seasoned veteran or just looking for a great sounding, high quality guitar, Dave is always up for talking shop.</p>
+    <div class="models-grid">
+      <div class="model-card">
+        <img src="https://ryerguitars.com/wp-content/uploads/2017/02/Dreadnought-1-270x405.jpg" alt="Ryer Dreadnought" loading="lazy">
+        <div class="card-label">Dreadnought</div>
+      </div>
+      <div class="model-card">
+        <img src="https://ryerguitars.com/wp-content/uploads/2015/09/front_jumbo1.jpg" alt="Ryer Jumbo" loading="lazy">
+        <div class="card-label">Jumbo</div>
+      </div>
+      <div class="model-card">
+        <img src="https://ryerguitars.com/wp-content/uploads/2017/08/Classical-Front.jpg" alt="Ryer Classical / Flamenco" loading="lazy">
+        <div class="card-label">Classical / Flamenco</div>
+      </div>
+      <div class="model-card">
+        <img src="https://ryerguitars.com/wp-content/uploads/2015/09/ryer_mandolin.jpg" alt="Ryer Mandolin" loading="lazy">
+        <div class="card-label">Mandolin</div>
+      </div>
+      <div class="model-card">
+        <img src="https://ryerguitars.com/wp-content/uploads/2017/06/OOFron.1t-270x405.jpg" alt="Ryer OO" loading="lazy">
+        <div class="card-label">OO</div>
+      </div>
+      <div class="model-card">
+        <img src="https://ryerguitars.com/wp-content/uploads/2017/02/OM20-270x405.jpg" alt="Ryer OM" loading="lazy">
+        <div class="card-label">OM</div>
+      </div>
+      <div class="model-card">
+        <img src="https://ryerguitars.com/wp-content/uploads/2017/08/SSSFront1-270x405.jpg" alt="Ryer Standard Steel String" loading="lazy">
+        <div class="card-label">Standard Steel String</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CUSTOM BUILDS -->
+<section class="custom" id="custom">
+  <div class="container fade-in">
+    <div class="section-label">Custom Builds</div>
+    <p style="color: var(--cream-dim); font-size: 0.95rem;">Each instrument is designed and built according to the desires of the player. A 20% non-refundable deposit is required to confirm orders.</p>
+    <div class="price-block">Starting at $8,500 <span style="font-size: 0.9rem; color: var(--cream-dim);">+ tax</span></div>
+
+    <div class="spec-columns">
+      <div class="spec-group">
+        <h3>Standard Specs</h3>
+        <ul>
+          <li>Tops — Sitka Spruce, Lutz Spruce, Engelmann, Cedar</li>
+          <li>Backs &amp; Sides — Indian Rosewood or Mahogany</li>
+          <li>Neck — Mahogany, Spanish Cedar</li>
+          <li>Bridge — Rosewood or Ebony</li>
+          <li>Fingerboard — Rosewood or Ebony</li>
+          <li>Scale Length — 61 to 65 cm</li>
+          <li>Tuners — Gotoh 510's or Schertler</li>
+          <li>Nut &amp; Saddle — Bone</li>
+          <li>Finish — French polish or Poly</li>
+        </ul>
+      </div>
+      <div class="spec-group">
+        <h3>Available Options</h3>
+        <ul>
+          <li>Single cutaway</li>
+          <li>Arm relief / Arm rest (Classical)</li>
+          <li>Chest relief</li>
+          <li>Double top</li>
+          <li>Side sound port</li>
+          <li>Left handed</li>
+          <li>K&amp;K Pick-up</li>
+          <li>Snakewood binding, bridge, fingerboard</li>
+          <li>Custom inlay work</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COURSES -->
+<section class="courses" id="courses">
+  <div class="container fade-in">
+    <div class="section-label">Courses</div>
+    <div class="course-card">
+      <h3>Lutherie Course</h3>
+      <div class="course-price">$5,000 + tax &middot; up to 200 hours</div>
+      <p>Students learn to design and build their own quality acoustic guitar. The cost of materials and use of tools is included. Courses typically run Monday to Friday but can be customized to meet your needs. All stages of the building process are covered — from wood selection, carving the neck, bending sides, bracing, tuning tops and backs, binding, finishing, and final assembly and setup. A 20% down payment is required on registration.</p>
+      <p style="margin-top: 1rem;">Very limited space available at the shop in Madoc, Ontario. Please call or email to arrange.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="container fade-in">
+    <div class="section-label">Contact Dave</div>
+    <div class="contact-phone">613 969 5960</div>
+    <div class="contact-line">
+      <a href="mailto:dave@ryerguitars.com">dave@ryerguitars.com</a>
+    </div>
+    <div class="social-links">
+      <a href="https://www.facebook.com/DnARyerGuitars/" target="_blank" rel="noopener">Facebook</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  &copy; 2026 Ryer Guitars &middot; Madoc, Ontario
+</footer>
+
+<script>
+function closeNav() {
+  document.querySelector('.nav-links').classList.remove('open');
+}
+
+// Fade-in on scroll
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.15 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
