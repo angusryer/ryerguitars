@@ -1,0 +1,57 @@
+---
+---
+<section class="about" id="about">
+  <div class="container fade-in">
+    <div class="section-label">About Dave</div>
+    <div class="about-content">
+      <div class="about-text">
+        <p>I have always had a deep appreciation for fine woodworking, especially as it applies to musical instruments. In the late 1980s, I repaired stringed instruments for local music shops, and since the turn of the millennium I have dedicated myself to learning the art of crafting high quality acoustic and classical guitars — developing my own voice as a luthier through years of hands-on building. Early in that journey I had the good fortune of training with Sergei de Jonge and spending over two years working in his shop, an experience that helped shape my foundational technique.</p>
+        <p>I came to realize that there is no better way to live than to do what I have the passion for. Art and the craft of building something so beautifully majestic, rich in detail, technologically advanced and yet, so simple. The guitar, in all of its various forms, has been around for eons — so widely recognized and appreciated the world over — and yet, there's still so much to learn, so many nuances that make each guitar uniquely personal.</p>
+        <p>Whether it be a classical, flamenco or steel stringed instrument, each will be unique, designed and built according to the desires of the player. Together, we will build a meticulously handcrafted instrument using the finest tone woods and the very best techniques to ensure every client's experience exceeds their expectations. On occasion, Dave is also open to working one-on-one with serious students who wish to learn the craft — just reach out directly to discuss.</p>
+        <p class="signature">— David Ryer</p>
+      </div>
+      <img
+        class="about-img"
+        src="/images/bw-ebony-lg/bw-ebony-lg-11.jpg"
+        alt="Dave Ryer in the workshop"
+        width="1600"
+        height="2400"
+        fetchpriority="high"
+        decoding="async"
+      >
+    </div>
+  </div>
+</section>
+
+<style>
+.about { background: var(--bg-warm); }
+.about-content {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+  align-items: stretch;
+}
+.about-text {
+  display: flex; flex-direction: column; justify-content: center;
+}
+.about-text p { margin-bottom: 1.2rem; color: var(--cream-dim); font-size: 0.95rem; }
+.about-text .signature {
+  font-family: var(--serif); font-style: italic;
+  color: var(--accent); font-size: 1.1rem; margin-top: 2rem;
+}
+.about-img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: grayscale(20%) contrast(1.05);
+  border: 1px solid rgba(201, 169, 110, 0.15);
+  background: var(--bg-card);
+  display: block;
+  min-height: 300px;
+}
+@media (max-width: 1024px) and (min-width: 901px) {
+  .about-content { grid-template-columns: 1.3fr 0.7fr; gap: 2rem; }
+}
+@media (max-width: 900px) {
+  .about-content { grid-template-columns: 1fr; }
+  .about-img {
+    height: auto; aspect-ratio: 1 / 1; width: 100%; min-height: unset;
+  }
+}
+</style>

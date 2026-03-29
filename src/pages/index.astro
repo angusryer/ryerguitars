@@ -1,0 +1,57 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import OrnamentDivider from '../components/OrnamentDivider.astro';
+import About from '../components/About.astro';
+import Gallery from '../components/Gallery.astro';
+import CustomBuilds from '../components/CustomBuilds.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+---
+<Base>
+  <Nav />
+  <Hero />
+  <OrnamentDivider />
+  <About />
+  <OrnamentDivider />
+  <Gallery />
+  <OrnamentDivider />
+  <CustomBuilds />
+  <OrnamentDivider />
+  <Contact />
+  <Footer />
+</Base>
+
+<script>
+// Fade-in on scroll
+const observer = new IntersectionObserver(
+  (entries) => entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+  { threshold: 0, rootMargin: '0px 0px -60px 0px' }
+);
+document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
+
+// Hero parallax
+(function () {
+  const mq      = window.matchMedia('(max-width: 900px)');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (mq.matches || reduced.matches) return;
+
+  const heroBg = document.querySelector('.hero__bg') as HTMLElement | null;
+  if (!heroBg) return;
+  const speed  = parseFloat(heroBg.dataset.parallaxSpeed ?? '0.25') || 0.25;
+  let ticking  = false;
+
+  function update() {
+    heroBg!.style.transform = `translateY(${window.scrollY * speed}px)`;
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) { requestAnimationFrame(update); ticking = true; }
+  }, { passive: true });
+
+  update();
+})();
+</script>

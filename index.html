@@ -1,523 +1,930 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ryer Guitars — Handcrafted Acoustic Instruments</title>
-<meta name="description" content="Custom handcrafted acoustic and classical guitars by luthier Dave Ryer. Built with uncompromising standards in Madoc, Ontario.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Libre+Franklin:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ryer Guitars — Handcrafted Acoustic Instruments</title>
+    <meta
+      name="description"
+      content="Custom handcrafted acoustic and classical guitars by luthier Dave Ryer. Built with uncompromising standards in Madoc, Ontario."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Libre+Franklin:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-:root {
-  --bg: #1a1714;
-  --bg-warm: #211e19;
-  --bg-card: #2a2520;
-  --cream: #e8e0d4;
-  --cream-dim: #b0a696;
-  --accent: #c9a96e;
-  --accent-dim: #a6894f;
-  --serif: 'Cormorant Garamond', Georgia, serif;
-  --sans: 'Libre Franklin', system-ui, sans-serif;
-}
+      :root {
+        --bg: #1a1714;
+        --bg-warm: #211e19;
+        --bg-card: #2a2520;
+        --cream: #e8e0d4;
+        --cream-dim: #b0a696;
+        --accent: #c9a96e;
+        --accent-dim: #a6894f;
+        --serif: "Cormorant Garamond", Georgia, serif;
+        --sans: "Libre Franklin", system-ui, sans-serif;
+      }
 
-html { scroll-behavior: smooth; }
+      html {
+        scroll-behavior: smooth;
+      }
 
-body {
-  background: var(--bg);
-  color: var(--cream);
-  font-family: var(--sans);
-  font-weight: 300;
-  line-height: 1.7;
-  font-size: 16px;
-  -webkit-font-smoothing: antialiased;
-}
+      body {
+        background: var(--bg);
+        color: var(--cream);
+        font-family: var(--sans);
+        font-weight: 300;
+        line-height: 1.7;
+        font-size: 16px;
+        -webkit-font-smoothing: antialiased;
+      }
 
-/* ── NAV ── */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: rgba(26, 23, 20, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(201, 169, 110, 0.1);
-  transition: background 0.3s;
-}
-.nav-inner {
-  max-width: 1100px; margin: 0 auto;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0.9rem 1.5rem;
-}
-.nav-brand {
-  font-family: var(--serif); font-size: 1.25rem; font-weight: 300;
-  color: var(--cream); text-decoration: none; letter-spacing: 0.15em;
-  text-transform: uppercase;
-}
-.nav-brand span { color: var(--accent); }
-.nav-links { display: flex; gap: 2rem; list-style: none; }
-.nav-links a {
-  color: var(--cream-dim); text-decoration: none;
-  font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
-  font-weight: 400; transition: color 0.3s;
-}
-.nav-links a:hover { color: var(--accent); }
+      /* ── NAV ── */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        background: rgba(26, 23, 20, 0.92);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(201, 169, 110, 0.1);
+        transition: background 0.3s;
+      }
+      .nav-inner {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.9rem 1.5rem;
+      }
+      .nav-brand {
+        font-family: var(--serif);
+        font-size: 1.25rem;
+        font-weight: 300;
+        color: var(--cream);
+        text-decoration: none;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+      }
+      .nav-brand span {
+        color: var(--accent);
+      }
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+      }
+      .nav-links a {
+        color: var(--cream-dim);
+        text-decoration: none;
+        font-size: 0.75rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-weight: 400;
+        transition: color 0.3s;
+      }
+      .nav-links a:hover {
+        color: var(--accent);
+      }
 
-.nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; }
-.nav-toggle span {
-  display: block; width: 22px; height: 1.5px; background: var(--cream);
-  margin: 5px 0; transition: all 0.3s;
-}
+      .nav-toggle {
+        display: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0.5rem;
+      }
+      .nav-toggle span {
+        display: block;
+        width: 22px;
+        height: 1.5px;
+        background: var(--cream);
+        margin: 5px 0;
+        transition: all 0.3s;
+      }
 
-@media (max-width: 900px) {
-  .nav-toggle { display: block; }
-  .nav-links {
-    display: none; flex-direction: column; gap: 0;
-    position: absolute; top: 100%; left: 0; right: 0;
-    background: rgba(26, 23, 20, 0.97);
-    border-bottom: 1px solid rgba(201, 169, 110, 0.1);
-  }
-  .nav-links.open { display: flex; }
-  .nav-links a { display: block; padding: 1rem 1.5rem; }
-}
+      @media (max-width: 900px) {
+        .nav-toggle {
+          display: block;
+        }
+        .nav-links {
+          display: none;
+          flex-direction: column;
+          gap: 0;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background: rgba(26, 23, 20, 0.97);
+          border-bottom: 1px solid rgba(201, 169, 110, 0.1);
+        }
+        .nav-links.open {
+          display: flex;
+        }
+        .nav-links a {
+          display: block;
+          padding: 1rem 1.5rem;
+        }
+      }
 
-/* ── SECTIONS ── */
-section { padding: 6rem 1.5rem; }
-.container { max-width: 900px; margin: 0 auto; }
+      /* ── SECTIONS ── */
+      section {
+        padding: 6rem 1.5rem;
+      }
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+      }
 
-.section-label {
-  font-family: var(--serif); font-size: 0.85rem;
-  letter-spacing: 0.25em; text-transform: uppercase;
-  color: var(--accent); margin-bottom: 2rem;
-}
+      .section-label {
+        font-family: var(--serif);
+        font-size: 0.85rem;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 2rem;
+      }
 
-/* ── ORNATE DIVIDER ── */
-.ornate-divider {
-  display: flex; align-items: center; justify-content: center;
-  padding: 1.5rem 1.5rem;
-  overflow: hidden;
-}
-.ornate-divider svg {
-  width: 100%; max-width: 700px;
-  height: 24px; overflow: visible;
-}
+      /* ── ORNATE DIVIDER ── */
+      .ornate-divider {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem 1.5rem;
+        overflow: hidden;
+      }
+      .ornate-divider svg {
+        width: 100%;
+        max-width: 700px;
+        height: 24px;
+        overflow: visible;
+      }
 
-/* ── HERO ── */
-.hero {
-  min-height: 100vh; display: flex; align-items: center; justify-content: center;
-  text-align: center; padding-top: 5rem;
-  position: relative; overflow: hidden;
-  background-color: #0e0c0a;
-}
-/* parallax image layer — oversized with vh so offset never reveals edges */
-.hero__bg {
-  position: absolute;
-  top: -20vh; bottom: -20vh; left: 0; right: 0;
-  background-image: url('images/bw-ebony-lg/bw-ebony-lg-10.jpg');
-  background-size: cover;
-  background-position: center;
-  will-change: transform;
-  filter: grayscale(20%) contrast(1.05);
-}
-/* dark overlay */
-.hero__bg::after {
-  content: '';
-  position: absolute; inset: 0;
-  background: rgba(14, 10, 8, 0.62);
-  z-index: 1;
-}
-/* subtle gold accent glow */
-.hero__bg::before {
-  content: '';
-  position: absolute; inset: 0;
-  background:
-    radial-gradient(ellipse at 30% 50%, rgba(201, 169, 110, 0.08) 0%, transparent 60%),
-    radial-gradient(ellipse at 70% 70%, rgba(201, 169, 110, 0.05) 0%, transparent 50%);
-  z-index: 2;
-}
-@media (max-width: 900px) {
-  .hero__bg { top: 0; bottom: 0; }
-}
-.hero-content { position: relative; z-index: 2; padding: 0 1.5rem; }
-.hero h1 {
-  font-family: var(--serif); font-weight: 300;
-  font-size: clamp(2.8rem, 7vw, 5.5rem);
-  line-height: 1.1; letter-spacing: 0.04em;
-  margin-bottom: 1.5rem; color: var(--cream);
-}
-.hero p {
-  font-size: 1rem; color: var(--cream);
-  max-width: 480px; margin: 0 auto 2.5rem;
-  letter-spacing: 0.02em;
-}
-.hero-rule {
-  width: 60px; height: 1px; background: var(--accent);
-  margin: 0 auto 2rem; opacity: 0.6;
-}
-.hero-sub {
-  font-family: var(--serif); font-size: 0.85rem;
-  letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--accent);
-}
+      /* ── HERO ── */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding-top: 5rem;
+        position: relative;
+        overflow: hidden;
+        background-color: #0e0c0a;
+      }
+      /* parallax image layer — oversized with vh so offset never reveals edges */
+      .hero__bg {
+        position: absolute;
+        top: -20vh;
+        bottom: -20vh;
+        left: 0;
+        right: 0;
+        background-image: url("images/bw-ebony-lg/bw-ebony-lg-10.jpg");
+        background-size: cover;
+        background-position: center;
+        will-change: transform;
+        filter: grayscale(20%) contrast(1.05);
+      }
+      /* dark overlay */
+      .hero__bg::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(14, 10, 8, 0.62);
+        z-index: 1;
+      }
+      /* subtle gold accent glow */
+      .hero__bg::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(ellipse at 30% 50%, rgba(201, 169, 110, 0.08) 0%, transparent 60%),
+          radial-gradient(ellipse at 70% 70%, rgba(201, 169, 110, 0.05) 0%, transparent 50%);
+        z-index: 2;
+      }
+      @media (max-width: 900px) {
+        .hero__bg {
+          top: 0;
+          bottom: 0;
+        }
+      }
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        padding: 0 1.5rem;
+      }
+      .hero h1 {
+        font-family: var(--serif);
+        font-weight: 300;
+        font-size: clamp(2.8rem, 7vw, 5.5rem);
+        line-height: 1.1;
+        letter-spacing: 0.04em;
+        margin-bottom: 1.5rem;
+        color: var(--cream);
+      }
+      .hero p {
+        font-size: 1rem;
+        color: var(--cream);
+        max-width: 480px;
+        margin: 0 auto 2.5rem;
+        letter-spacing: 0.02em;
+      }
+      .hero-rule {
+        width: 60px;
+        height: 1px;
+        background: var(--accent);
+        margin: 0 auto 2rem;
+        opacity: 0.6;
+      }
+      .hero-sub {
+        font-family: var(--serif);
+        font-size: 0.85rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
 
-/* ── ABOUT ── */
-.about { background: var(--bg-warm); }
-.about-content {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
-  /* stretch makes both columns equal height so image fills the text height */
-  align-items: stretch;
-}
-.about-text {
-  display: flex; flex-direction: column; justify-content: center;
-}
-.about-text p { margin-bottom: 1.2rem; color: var(--cream-dim); font-size: 0.95rem; }
-.about-text .signature {
-  font-family: var(--serif); font-style: italic;
-  color: var(--accent); font-size: 1.1rem; margin-top: 2rem;
-}
-.about-img {
-  width: 100%; height: 100%; object-fit: cover;
-  filter: grayscale(20%) contrast(1.05);
-  border: 1px solid rgba(201, 169, 110, 0.15);
-  background: var(--bg-card);
-  display: block;
-  /* min-height prevents a tiny image if text is very short */
-  min-height: 300px;
-}
-/* tablet: wider text column, shorter image ratio */
-@media (max-width: 1024px) and (min-width: 901px) {
-  .about-content { grid-template-columns: 1.3fr 0.7fr; gap: 2rem; }
-}
-/* column mode: image is full-width and roughly square */
-@media (max-width: 900px) {
-  .about-content { grid-template-columns: 1fr; }
-  .about-img {
-    height: auto;
-    aspect-ratio: 1 / 1;
-    width: 100%;
-    min-height: unset;
-  }
-}
+      /* ── ABOUT ── */
+      .about {
+        background: var(--bg-warm);
+      }
+      .about-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        /* stretch makes both columns equal height so image fills the text height */
+        align-items: stretch;
+      }
+      .about-text {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .about-text p {
+        margin-bottom: 1.2rem;
+        color: var(--cream-dim);
+        font-size: 0.95rem;
+      }
+      .about-text .signature {
+        font-family: var(--serif);
+        font-style: italic;
+        color: var(--accent);
+        font-size: 1.1rem;
+        margin-top: 2rem;
+      }
+      .about-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: grayscale(20%) contrast(1.05);
+        border: 1px solid rgba(201, 169, 110, 0.15);
+        background: var(--bg-card);
+        display: block;
+        /* min-height prevents a tiny image if text is very short */
+        min-height: 300px;
+      }
+      /* tablet: wider text column, shorter image ratio */
+      @media (max-width: 1024px) and (min-width: 901px) {
+        .about-content {
+          grid-template-columns: 1.3fr 0.7fr;
+          gap: 2rem;
+        }
+      }
+      /* column mode: image is full-width and roughly square */
+      @media (max-width: 900px) {
+        .about-content {
+          grid-template-columns: 1fr;
+        }
+        .about-img {
+          height: auto;
+          aspect-ratio: 1 / 1;
+          width: 100%;
+          min-height: unset;
+        }
+      }
 
-/* ── GALLERY ── */
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 0.75rem; margin-top: 2rem;
-}
-.gallery-card {
-  overflow: hidden;
-  aspect-ratio: 3/4;
-  background: var(--bg-card);
-  border: 1px solid rgba(201, 169, 110, 0.08);
-  transition: border-color 0.4s;
-}
-.gallery-card:hover { border-color: rgba(201, 169, 110, 0.3); }
-.gallery-card img {
-  width: 100%; height: 100%; object-fit: cover;
-  display: block; transition: transform 0.6s ease;
-  background: var(--bg-card);
-}
-.gallery-card:hover img { transform: scale(1.04); }
-/* mobile: 2-column grid, full width */
-@media (max-width: 540px) {
-  .gallery-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.5rem;
-  }
-}
+      /* ── GALLERY ── */
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 0.75rem;
+        margin-top: 2rem;
+      }
+      .gallery-card {
+        overflow: hidden;
+        aspect-ratio: 3/4;
+        background: var(--bg-card);
+        border: 1px solid rgba(201, 169, 110, 0.08);
+        transition: border-color 0.4s;
+      }
+      .gallery-card:hover {
+        border-color: rgba(201, 169, 110, 0.3);
+      }
+      .gallery-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.6s ease;
+        background: var(--bg-card);
+      }
+      .gallery-card:hover img {
+        transform: scale(1.04);
+      }
+      /* mobile: 2-column grid, full width */
+      @media (max-width: 540px) {
+        .gallery-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 0.5rem;
+        }
+      }
 
-/* ── CUSTOM BUILDS ── */
-.custom { background: var(--bg-warm); }
-.custom .price-block {
-  font-family: var(--serif); font-size: clamp(1.3rem, 3vw, 1.8rem);
-  color: var(--accent); margin: 1.5rem 0 2rem;
-  font-weight: 300;
-}
-.spec-group h3 {
-  font-family: var(--serif); font-size: 1rem; font-weight: 400;
-  color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase;
-  margin-bottom: 0.8rem;
-}
-.spec-group ul { list-style: none; }
-.spec-group li {
-  color: var(--cream-dim); font-size: 0.88rem; padding: 0.3rem 0;
-  border-bottom: 1px solid rgba(201, 169, 110, 0.06);
-}
-.spec-group { margin-top: 2rem; max-width: 480px; }
+      /* ── CUSTOM BUILDS ── */
+      .custom {
+        background: var(--bg-warm);
+      }
+      .custom .price-block {
+        font-family: var(--serif);
+        font-size: clamp(1.3rem, 3vw, 1.8rem);
+        color: var(--accent);
+        margin: 1.5rem 0 2rem;
+        font-weight: 300;
+      }
+      .spec-group h3 {
+        font-family: var(--serif);
+        font-size: 1rem;
+        font-weight: 400;
+        color: var(--accent);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 0.8rem;
+      }
+      .spec-group ul {
+        list-style: none;
+      }
+      .spec-group li {
+        color: var(--cream-dim);
+        font-size: 0.88rem;
+        padding: 0.3rem 0;
+        border-bottom: 1px solid rgba(201, 169, 110, 0.06);
+      }
+      .spec-group {
+        margin-top: 2rem;
+        max-width: 480px;
+      }
 
-/* ── CONTACT ── */
-.contact { text-align: center; }
-.contact-line {
-  margin: 1.2rem 0;
-  font-size: 1rem; color: var(--cream-dim);
-}
-.contact-line a {
-  color: var(--cream); text-decoration: none;
-  border-bottom: 1px solid rgba(201, 169, 110, 0.3);
-  transition: border-color 0.3s;
-}
-.contact-line a:hover { border-color: var(--accent); }
-.contact-phone {
-  font-family: var(--serif); font-size: clamp(1.2rem, 3vw, 1.6rem);
-  color: var(--cream); letter-spacing: 0.05em;
-}
-.social-links { margin-top: 2.5rem; }
-.social-links a {
-  display: inline-block; color: var(--accent-dim);
-  font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase;
-  text-decoration: none; padding: 0.6rem 1.2rem;
-  border: 1px solid rgba(201, 169, 110, 0.2);
-  transition: all 0.3s;
-}
-.social-links a:hover {
-  color: var(--accent); border-color: var(--accent);
-}
+      /* ── CONTACT ── */
+      .contact {
+        text-align: center;
+      }
+      .contact-line {
+        margin: 1.2rem 0;
+        font-size: 1rem;
+        color: var(--cream-dim);
+      }
+      .contact-line a {
+        color: var(--cream);
+        text-decoration: none;
+        border-bottom: 1px solid rgba(201, 169, 110, 0.3);
+        transition: border-color 0.3s;
+      }
+      .contact-line a:hover {
+        border-color: var(--accent);
+      }
+      .contact-phone {
+        font-family: var(--serif);
+        font-size: clamp(1.2rem, 3vw, 1.6rem);
+        color: var(--cream);
+        letter-spacing: 0.05em;
+      }
+      .social-links {
+        margin-top: 2.5rem;
+      }
+      .social-links a {
+        display: inline-block;
+        color: var(--accent-dim);
+        font-size: 0.78rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 0.6rem 1.2rem;
+        border: 1px solid rgba(201, 169, 110, 0.2);
+        transition: all 0.3s;
+      }
+      .social-links a:hover {
+        color: var(--accent);
+        border-color: var(--accent);
+      }
 
-/* ── FOOTER ── */
-footer {
-  text-align: center; padding: 3rem 1.5rem;
-  font-size: 0.78rem; color: var(--cream-dim);
-  border-top: 1px solid rgba(201, 169, 110, 0.08);
-  letter-spacing: 0.05em;
-}
+      /* ── FOOTER ── */
+      footer {
+        text-align: center;
+        padding: 3rem 1.5rem;
+        font-size: 0.78rem;
+        color: var(--cream-dim);
+        border-top: 1px solid rgba(201, 169, 110, 0.08);
+        letter-spacing: 0.05em;
+      }
 
-/* ── ANIMATIONS ── */
-@media (prefers-reduced-motion: no-preference) {
-  .fade-in {
-    opacity: 0; transform: translateY(20px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
-  .fade-in.visible { opacity: 1; transform: translateY(0); }
-}
-</style>
-</head>
-<body>
-
-<!-- NAV -->
-<nav>
-  <div class="nav-inner">
-    <a href="#home" class="nav-brand">Ryer <span>Guitars</span></a>
-    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-links"
-      onclick="var nl=document.querySelector('.nav-links');nl.classList.toggle('open');this.setAttribute('aria-expanded',nl.classList.contains('open'))">
-      <span></span><span></span><span></span>
-    </button>
-    <ul class="nav-links" id="nav-links">
-      <li><a href="#home" onclick="closeNav()">Home</a></li>
-      <li><a href="#about" onclick="closeNav()">About</a></li>
-      <li><a href="#models" onclick="closeNav()">Gallery</a></li>
-      <li><a href="#custom" onclick="closeNav()">Custom Builds</a></li>
-      <li><a href="#contact" onclick="closeNav()">Contact</a></li>
-    </ul>
-  </div>
-</nav>
-
-<!-- HERO -->
-<section class="hero" id="home">
-  <div class="hero__bg" data-parallax-speed="0.25"></div>
-  <div class="hero-content">
-    <h1>Ryer Guitars</h1>
-    <div class="hero-rule"></div>
-    <p>Meticulously handcrafted acoustic and classical guitars, built with uncompromising standards.</p>
-    <span class="hero-sub">Madoc, Ontario</span>
-  </div>
-</section>
-
-<!-- ORNATE DIVIDER -->
-<div class="ornate-divider" aria-hidden="true">
-  <svg viewBox="0 0 700 24" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-    <!-- left arm: gentle curve rising to centre diamond -->
-    <path d="M 0 12 Q 120 12 160 12 Q 200 12 210 8 Q 220 4 230 4 Q 240 4 248 8 L 254 11" stroke="#c9a96e" stroke-width="1.5" stroke-opacity="0.55" fill="none"/>
-    <!-- left inner flourish -->
-    <path d="M 254 11 Q 258 8 262 6 Q 266 4 270 6 Q 274 8 276 10" stroke="#c9a96e" stroke-width="1" stroke-opacity="0.4" fill="none"/>
-    <!-- centre diamond -->
-    <polygon points="350,5 361,12 350,19 339,12" stroke="#c9a96e" stroke-width="1.5" stroke-opacity="0.75" fill="none"/>
-    <!-- centre dot -->
-    <circle cx="350" cy="12" r="2" fill="#c9a96e" fill-opacity="0.6"/>
-    <!-- right inner flourish (mirror) -->
-    <path d="M 424 10 Q 426 8 430 6 Q 434 4 438 6 Q 442 8 446 11" stroke="#c9a96e" stroke-width="1" stroke-opacity="0.4" fill="none"/>
-    <!-- right arm (mirror) -->
-    <path d="M 446 11 L 452 8 Q 460 4 470 4 Q 480 4 490 8 Q 500 12 540 12 Q 580 12 700 12" stroke="#c9a96e" stroke-width="1.5" stroke-opacity="0.55" fill="none"/>
-    <!-- small accent dots flanking the diamond -->
-    <circle cx="322" cy="12" r="1.5" fill="#c9a96e" fill-opacity="0.4"/>
-    <circle cx="378" cy="12" r="1.5" fill="#c9a96e" fill-opacity="0.4"/>
-  </svg>
-</div>
-
-<!-- ABOUT -->
-<section class="about" id="about">
-  <div class="container fade-in">
-    <div class="section-label">About Dave</div>
-    <div class="about-content">
-      <div class="about-text">
-        <p>I have always had a deep appreciation for fine woodworking, especially as it applies to musical instruments. In the late 1980s, I repaired stringed instruments for local music shops, and since the turn of the millennium I have dedicated myself to learning the art of crafting high quality acoustic and classical guitars — developing my own voice as a luthier through years of hands-on building. Early in that journey I had the good fortune of training with Sergei de Jonge and spending over two years working in his shop, an experience that helped shape my foundational technique.</p>
-        <p>I came to realize that there is no better way to live than to do what I have the passion for. Art and the craft of building something so beautifully majestic, rich in detail, technologically advanced and yet, so simple. The guitar, in all of its various forms, has been around for eons — so widely recognized and appreciated the world over — and yet, there's still so much to learn, so many nuances that make each guitar uniquely personal.</p>
-        <p>Whether it be a classical, flamenco or steel stringed instrument, each will be unique, designed and built according to the desires of the player. Together, we will build a meticulously handcrafted instrument using the finest tone woods and the very best techniques to ensure every client's experience exceeds their expectations. On occasion, Dave is also open to working one-on-one with serious students who wish to learn the craft — just reach out directly to discuss.</p>
-        <p class="signature">— David Ryer</p>
+      /* ── ANIMATIONS ── */
+      @media (prefers-reduced-motion: no-preference) {
+        .fade-in {
+          opacity: 0;
+          transform: translateY(20px);
+          transition:
+            opacity 0.8s ease,
+            transform 0.8s ease;
+        }
+        .fade-in.visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAV -->
+    <nav>
+      <div class="nav-inner">
+        <a href="#home" class="nav-brand">Ryer <span>Guitars</span></a>
+        <button
+          class="nav-toggle"
+          aria-label="Menu"
+          aria-expanded="false"
+          aria-controls="nav-links"
+          onclick="
+            var nl = document.querySelector('.nav-links');
+            nl.classList.toggle('open');
+            this.setAttribute('aria-expanded', nl.classList.contains('open'));
+          "
+        >
+          <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="#home" onclick="closeNav()">Home</a></li>
+          <li><a href="#about" onclick="closeNav()">About</a></li>
+          <li><a href="#models" onclick="closeNav()">Gallery</a></li>
+          <li><a href="#custom" onclick="closeNav()">Custom Builds</a></li>
+          <li><a href="#contact" onclick="closeNav()">Contact</a></li>
+        </ul>
       </div>
-      <img class="about-img"
-           src="images/bw-ebony-lg/bw-ebony-lg-11.jpg"
-           alt="Dave Ryer in the workshop"
-           width="1600" height="2400"
-           fetchpriority="high"
-           decoding="async">
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div class="hero__bg" data-parallax-speed="0.25"></div>
+      <div class="hero-content">
+        <h1>Ryer Guitars</h1>
+        <div class="hero-rule"></div>
+        <p>
+          Meticulously handcrafted acoustic and classical guitars, built with uncompromising
+          standards.
+        </p>
+        <span class="hero-sub">Madoc, Ontario</span>
+      </div>
+    </section>
+
+    <!-- ORNATE DIVIDER -->
+    <div class="ornate-divider" aria-hidden="true">
+      <svg
+        viewBox="0 0 700 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="xMidYMid meet"
+      >
+        <!-- left arm: gentle curve rising to centre diamond -->
+        <path
+          d="M 0 12 Q 120 12 160 12 Q 200 12 210 8 Q 220 4 230 4 Q 240 4 248 8 L 254 11"
+          stroke="#c9a96e"
+          stroke-width="1.5"
+          stroke-opacity="0.55"
+          fill="none"
+        />
+        <!-- left inner flourish -->
+        <path
+          d="M 254 11 Q 258 8 262 6 Q 266 4 270 6 Q 274 8 276 10"
+          stroke="#c9a96e"
+          stroke-width="1"
+          stroke-opacity="0.4"
+          fill="none"
+        />
+        <!-- centre diamond -->
+        <polygon
+          points="350,5 361,12 350,19 339,12"
+          stroke="#c9a96e"
+          stroke-width="1.5"
+          stroke-opacity="0.75"
+          fill="none"
+        />
+        <!-- centre dot -->
+        <circle cx="350" cy="12" r="2" fill="#c9a96e" fill-opacity="0.6" />
+        <!-- right inner flourish (mirror) -->
+        <path
+          d="M 424 10 Q 426 8 430 6 Q 434 4 438 6 Q 442 8 446 11"
+          stroke="#c9a96e"
+          stroke-width="1"
+          stroke-opacity="0.4"
+          fill="none"
+        />
+        <!-- right arm (mirror) -->
+        <path
+          d="M 446 11 L 452 8 Q 460 4 470 4 Q 480 4 490 8 Q 500 12 540 12 Q 580 12 700 12"
+          stroke="#c9a96e"
+          stroke-width="1.5"
+          stroke-opacity="0.55"
+          fill="none"
+        />
+        <!-- small accent dots flanking the diamond -->
+        <circle cx="322" cy="12" r="1.5" fill="#c9a96e" fill-opacity="0.4" />
+        <circle cx="378" cy="12" r="1.5" fill="#c9a96e" fill-opacity="0.4" />
+      </svg>
     </div>
-  </div>
-</section>
 
-<!-- ORNATE DIVIDER -->
-<div class="ornate-divider" aria-hidden="true">
-  <svg viewBox="0 0 700 24" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-    <path d="M 0 12 Q 120 12 160 12 Q 200 12 210 8 Q 220 4 230 4 Q 240 4 248 8 L 254 11" stroke="#c9a96e" stroke-width="1.5" stroke-opacity="0.55" fill="none"/>
-    <path d="M 254 11 Q 258 8 262 6 Q 266 4 270 6 Q 274 8 276 10" stroke="#c9a96e" stroke-width="1" stroke-opacity="0.4" fill="none"/>
-    <polygon points="350,5 361,12 350,19 339,12" stroke="#c9a96e" stroke-width="1.5" stroke-opacity="0.75" fill="none"/>
-    <circle cx="350" cy="12" r="2" fill="#c9a96e" fill-opacity="0.6"/>
-    <path d="M 424 10 Q 426 8 430 6 Q 434 4 438 6 Q 442 8 446 11" stroke="#c9a96e" stroke-width="1" stroke-opacity="0.4" fill="none"/>
-    <path d="M 446 11 L 452 8 Q 460 4 470 4 Q 480 4 490 8 Q 500 12 540 12 Q 580 12 700 12" stroke="#c9a96e" stroke-width="1.5" stroke-opacity="0.55" fill="none"/>
-    <circle cx="322" cy="12" r="1.5" fill="#c9a96e" fill-opacity="0.4"/>
-    <circle cx="378" cy="12" r="1.5" fill="#c9a96e" fill-opacity="0.4"/>
-  </svg>
-</div>
+    <!-- ABOUT -->
+    <section class="about" id="about">
+      <div class="container fade-in">
+        <div class="section-label">About Dave</div>
+        <div class="about-content">
+          <div class="about-text">
+            <p>
+              I have always had a deep appreciation for fine woodworking, especially as it applies
+              to musical instruments. In the late 1980s, I repaired stringed instruments for local
+              music shops, and since the turn of the millennium I have dedicated myself to learning
+              the art of crafting high quality acoustic and classical guitars — developing my own
+              voice as a luthier through years of hands-on building. Early in that journey I had the
+              good fortune of training with Sergei de Jonge and spending over two years working in
+              his shop, an experience that helped shape my foundational technique.
+            </p>
+            <p>
+              I came to realize that there is no better way to live than to do what I have the
+              passion for. Art and the craft of building something so beautifully majestic, rich in
+              detail, technologically advanced and yet, so simple. The guitar, in all of its various
+              forms, has been around for eons — so widely recognized and appreciated the world over
+              — and yet, there's still so much to learn, so many nuances that make each guitar
+              uniquely personal.
+            </p>
+            <p>
+              Whether it be a classical, flamenco or steel stringed instrument, each will be unique,
+              designed and built according to the desires of the player. Together, we will build a
+              meticulously handcrafted instrument using the finest tone woods and the very best
+              techniques to ensure every client's experience exceeds their expectations. On
+              occasion, Dave is also open to working one-on-one with serious students who wish to
+              learn the craft — just reach out directly to discuss.
+            </p>
+            <p class="signature">— David Ryer</p>
+          </div>
+          <img
+            class="about-img"
+            src="images/bw-ebony-lg/bw-ebony-lg-11.jpg"
+            alt="Dave Ryer in the workshop"
+            width="1600"
+            height="2400"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </div>
+      </div>
+    </section>
 
-<!-- GALLERY -->
-<section class="models" id="models">
-  <div class="container fade-in">
-    <div class="section-label">Gallery</div>
-    <div class="gallery-grid">
-      <div class="gallery-card">
-        <img src="images/ryer-lg/ryer-lg-100.jpg" alt="Ryer Guitar" width="1600" height="2400" loading="lazy" decoding="async">
-      </div>
-      <div class="gallery-card">
-        <img src="images/ryer-lg/ryer-lg-104.jpg" alt="Ryer Guitar" width="1600" height="2400" loading="lazy" decoding="async">
-      </div>
-      <div class="gallery-card">
-        <img src="images/ryer-lg/ryer-lg-108.jpg" alt="Ryer Guitar" width="1600" height="2400" loading="lazy" decoding="async">
-      </div>
-      <div class="gallery-card">
-        <img src="images/ryer-lg/ryer-lg-112.jpg" alt="Ryer Guitar" width="1600" height="2400" loading="lazy" decoding="async">
-      </div>
-      <div class="gallery-card">
-        <img src="images/ryer-lg/ryer-lg-116.jpg" alt="Ryer Guitar" width="1600" height="2400" loading="lazy" decoding="async">
-      </div>
-      <div class="gallery-card">
-        <img src="images/ryer-lg/ryer-lg-120.jpg" alt="Ryer Guitar" width="1600" height="2400" loading="lazy" decoding="async">
-      </div>
-      <div class="gallery-card">
-        <img src="images/ryer-lg/ryer-lg-124.jpg" alt="Ryer Guitar" width="1600" height="2400" loading="lazy" decoding="async">
-      </div>
-      <div class="gallery-card">
-        <img src="images/ryer-lg/ryer-lg-128.jpg" alt="Ryer Guitar" width="1600" height="2400" loading="lazy" decoding="async">
-      </div>
-      <div class="gallery-card">
-        <img src="images/ryer-lg/ryer-lg-132.jpg" alt="Ryer Guitar" width="1600" height="2400" loading="lazy" decoding="async">
-      </div>
-      <div class="gallery-card">
-        <img src="images/ryer-lg/ryer-lg-136.jpg" alt="Ryer Guitar" width="1600" height="2400" loading="lazy" decoding="async">
-      </div>
-      <div class="gallery-card">
-        <img src="images/ryer-lg/ryer-lg-140.jpg" alt="Ryer Guitar" width="1600" height="2400" loading="lazy" decoding="async">
-      </div>
-      <div class="gallery-card">
-        <img src="images/ryer-lg/ryer-lg-144.jpg" alt="Ryer Guitar" width="1600" height="2400" loading="lazy" decoding="async">
-      </div>
+    <!-- ORNATE DIVIDER -->
+    <div class="ornate-divider" aria-hidden="true">
+      <svg
+        viewBox="0 0 700 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="xMidYMid meet"
+      >
+        <path
+          d="M 0 12 Q 120 12 160 12 Q 200 12 210 8 Q 220 4 230 4 Q 240 4 248 8 L 254 11"
+          stroke="#c9a96e"
+          stroke-width="1.5"
+          stroke-opacity="0.55"
+          fill="none"
+        />
+        <path
+          d="M 254 11 Q 258 8 262 6 Q 266 4 270 6 Q 274 8 276 10"
+          stroke="#c9a96e"
+          stroke-width="1"
+          stroke-opacity="0.4"
+          fill="none"
+        />
+        <polygon
+          points="350,5 361,12 350,19 339,12"
+          stroke="#c9a96e"
+          stroke-width="1.5"
+          stroke-opacity="0.75"
+          fill="none"
+        />
+        <circle cx="350" cy="12" r="2" fill="#c9a96e" fill-opacity="0.6" />
+        <path
+          d="M 424 10 Q 426 8 430 6 Q 434 4 438 6 Q 442 8 446 11"
+          stroke="#c9a96e"
+          stroke-width="1"
+          stroke-opacity="0.4"
+          fill="none"
+        />
+        <path
+          d="M 446 11 L 452 8 Q 460 4 470 4 Q 480 4 490 8 Q 500 12 540 12 Q 580 12 700 12"
+          stroke="#c9a96e"
+          stroke-width="1.5"
+          stroke-opacity="0.55"
+          fill="none"
+        />
+        <circle cx="322" cy="12" r="1.5" fill="#c9a96e" fill-opacity="0.4" />
+        <circle cx="378" cy="12" r="1.5" fill="#c9a96e" fill-opacity="0.4" />
+      </svg>
     </div>
-  </div>
-</section>
 
-<!-- ORNATE DIVIDER -->
-<div class="ornate-divider" aria-hidden="true">
-  <svg viewBox="0 0 700 24" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-    <path d="M 0 12 Q 120 12 160 12 Q 200 12 210 8 Q 220 4 230 4 Q 240 4 248 8 L 254 11" stroke="#c9a96e" stroke-width="1.5" stroke-opacity="0.55" fill="none"/>
-    <path d="M 254 11 Q 258 8 262 6 Q 266 4 270 6 Q 274 8 276 10" stroke="#c9a96e" stroke-width="1" stroke-opacity="0.4" fill="none"/>
-    <polygon points="350,5 361,12 350,19 339,12" stroke="#c9a96e" stroke-width="1.5" stroke-opacity="0.75" fill="none"/>
-    <circle cx="350" cy="12" r="2" fill="#c9a96e" fill-opacity="0.6"/>
-    <path d="M 424 10 Q 426 8 430 6 Q 434 4 438 6 Q 442 8 446 11" stroke="#c9a96e" stroke-width="1" stroke-opacity="0.4" fill="none"/>
-    <path d="M 446 11 L 452 8 Q 460 4 470 4 Q 480 4 490 8 Q 500 12 540 12 Q 580 12 700 12" stroke="#c9a96e" stroke-width="1.5" stroke-opacity="0.55" fill="none"/>
-    <circle cx="322" cy="12" r="1.5" fill="#c9a96e" fill-opacity="0.4"/>
-    <circle cx="378" cy="12" r="1.5" fill="#c9a96e" fill-opacity="0.4"/>
-  </svg>
-</div>
+    <!-- GALLERY -->
+    <section class="models" id="models">
+      <div class="container fade-in">
+        <div class="section-label">Gallery</div>
+        <div class="gallery-grid">
+          <div class="gallery-card">
+            <img
+              src="images/ryer-lg/ryer-lg-100.jpg"
+              alt="Ryer Guitar"
+              width="1600"
+              height="2400"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div class="gallery-card">
+            <img
+              src="images/ryer-lg/ryer-lg-104.jpg"
+              alt="Ryer Guitar"
+              width="1600"
+              height="2400"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div class="gallery-card">
+            <img
+              src="images/ryer-lg/ryer-lg-108.jpg"
+              alt="Ryer Guitar"
+              width="1600"
+              height="2400"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div class="gallery-card">
+            <img
+              src="images/ryer-lg/ryer-lg-112.jpg"
+              alt="Ryer Guitar"
+              width="1600"
+              height="2400"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div class="gallery-card">
+            <img
+              src="images/ryer-lg/ryer-lg-116.jpg"
+              alt="Ryer Guitar"
+              width="1600"
+              height="2400"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div class="gallery-card">
+            <img
+              src="images/ryer-lg/ryer-lg-120.jpg"
+              alt="Ryer Guitar"
+              width="1600"
+              height="2400"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div class="gallery-card">
+            <img
+              src="images/ryer-lg/ryer-lg-124.jpg"
+              alt="Ryer Guitar"
+              width="1600"
+              height="2400"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div class="gallery-card">
+            <img
+              src="images/ryer-lg/ryer-lg-128.jpg"
+              alt="Ryer Guitar"
+              width="1600"
+              height="2400"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div class="gallery-card">
+            <img
+              src="images/ryer-lg/ryer-lg-132.jpg"
+              alt="Ryer Guitar"
+              width="1600"
+              height="2400"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div class="gallery-card">
+            <img
+              src="images/ryer-lg/ryer-lg-136.jpg"
+              alt="Ryer Guitar"
+              width="1600"
+              height="2400"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div class="gallery-card">
+            <img
+              src="images/ryer-lg/ryer-lg-140.jpg"
+              alt="Ryer Guitar"
+              width="1600"
+              height="2400"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div class="gallery-card">
+            <img
+              src="images/ryer-lg/ryer-lg-144.jpg"
+              alt="Ryer Guitar"
+              width="1600"
+              height="2400"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
 
-<!-- CUSTOM BUILDS -->
-<section class="custom" id="custom">
-  <div class="container fade-in">
-    <div class="section-label">Custom Builds</div>
-    <p style="color: var(--cream-dim); font-size: 0.95rem;">Each instrument is designed and built according to the desires of the player. A 20% non-refundable deposit is required to confirm orders.</p>
-    <div class="price-block">$8,700 base price <span style="font-size: 0.9rem; color: var(--cream-dim);">+ options &amp; tax</span></div>
-
-    <div class="spec-group">
-      <h3>Standard Specs</h3>
-      <ul>
-        <li>Tops — Sitka Spruce, Lutz Spruce, Engelmann, Cedar</li>
-        <li>Backs &amp; Sides — Indian Rosewood or Mahogany</li>
-        <li>Neck — Mahogany, Spanish Cedar</li>
-        <li>Bridge — Rosewood or Ebony</li>
-        <li>Fingerboard — Rosewood or Ebony</li>
-        <li>Scale Length — 61 to 65 cm</li>
-        <li>Tuners — Gotoh 510's or Schertler</li>
-        <li>Nut &amp; Saddle — Bone</li>
-        <li>Finish — French polish or Poly</li>
-      </ul>
+    <!-- ORNATE DIVIDER -->
+    <div class="ornate-divider" aria-hidden="true">
+      <svg
+        viewBox="0 0 700 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="xMidYMid meet"
+      >
+        <path
+          d="M 0 12 Q 120 12 160 12 Q 200 12 210 8 Q 220 4 230 4 Q 240 4 248 8 L 254 11"
+          stroke="#c9a96e"
+          stroke-width="1.5"
+          stroke-opacity="0.55"
+          fill="none"
+        />
+        <path
+          d="M 254 11 Q 258 8 262 6 Q 266 4 270 6 Q 274 8 276 10"
+          stroke="#c9a96e"
+          stroke-width="1"
+          stroke-opacity="0.4"
+          fill="none"
+        />
+        <polygon
+          points="350,5 361,12 350,19 339,12"
+          stroke="#c9a96e"
+          stroke-width="1.5"
+          stroke-opacity="0.75"
+          fill="none"
+        />
+        <circle cx="350" cy="12" r="2" fill="#c9a96e" fill-opacity="0.6" />
+        <path
+          d="M 424 10 Q 426 8 430 6 Q 434 4 438 6 Q 442 8 446 11"
+          stroke="#c9a96e"
+          stroke-width="1"
+          stroke-opacity="0.4"
+          fill="none"
+        />
+        <path
+          d="M 446 11 L 452 8 Q 460 4 470 4 Q 480 4 490 8 Q 500 12 540 12 Q 580 12 700 12"
+          stroke="#c9a96e"
+          stroke-width="1.5"
+          stroke-opacity="0.55"
+          fill="none"
+        />
+        <circle cx="322" cy="12" r="1.5" fill="#c9a96e" fill-opacity="0.4" />
+        <circle cx="378" cy="12" r="1.5" fill="#c9a96e" fill-opacity="0.4" />
+      </svg>
     </div>
-  </div>
-</section>
 
-<!-- CONTACT -->
-<section class="contact" id="contact">
-  <div class="container fade-in">
-    <div class="section-label">Contact Dave</div>
-    <div class="contact-phone">613 969 5960</div>
-    <div class="contact-line">
-      <a href="mailto:dave@ryerguitars.com">dave@ryerguitars.com</a>
-    </div>
-    <div class="social-links">
-      <a href="https://www.facebook.com/DnARyerGuitars/" target="_blank" rel="noopener">Facebook</a>
-    </div>
-  </div>
-</section>
+    <!-- CUSTOM BUILDS -->
+    <section class="custom" id="custom">
+      <div class="container fade-in">
+        <div class="section-label">Custom Builds</div>
+        <p style="color: var(--cream-dim); font-size: 0.95rem">
+          Each instrument is designed and built according to the desires of the player. A 20%
+          non-refundable deposit is required to confirm orders.
+        </p>
+        <div class="price-block">
+          $8,700 CAD standard price
+          <span style="font-size: 0.9rem; color: var(--cream-dim)">+ tax</span>
+        </div>
 
-<footer>
-  &copy; 2026 Ryer Guitars &middot; Madoc, Ontario
-</footer>
+        <div class="spec-group">
+          <h3>Standard Specs</h3>
+          <ul>
+            <li>Tops — Sitka Spruce, Lutz Spruce, Engelmann, Cedar</li>
+            <li>Backs &amp; Sides — Indian Rosewood or Mahogany</li>
+            <li>Neck — Mahogany, Spanish Cedar</li>
+            <li>Bridge — Rosewood or Ebony</li>
+            <li>Fingerboard — Rosewood or Ebony</li>
+            <li>Scale Length — 61 to 65 cm</li>
+            <li>Tuners — Gotoh 510's or Schertler</li>
+            <li>Nut &amp; Saddle — Bone</li>
+            <li>Finish — French polish or Poly</li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
-<script>
-function closeNav() {
-  document.querySelector('.nav-links').classList.remove('open');
-}
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+      <div class="container fade-in">
+        <div class="section-label">Contact Dave</div>
+        <div class="contact-phone">613 969 5960</div>
+        <div class="contact-line">
+          <a href="mailto:dave@ryerguitars.com">dave@ryerguitars.com</a>
+        </div>
+        <div class="social-links">
+          <a href="https://www.facebook.com/DnARyerGuitars/" target="_blank" rel="noopener"
+            >Facebook</a
+          >
+        </div>
+      </div>
+    </section>
 
-// Fade-in on scroll
-// rootMargin fires the observer 60px before the element enters the viewport
-// threshold:0 means trigger as soon as any pixel is visible
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0, rootMargin: '0px 0px -60px 0px' });
-document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    <footer>&copy; 2026 Ryer Guitars &middot; Madoc, Ontario</footer>
 
-// ── HERO PARALLAX ──
-// The hero is always at the top of the page, so we drive the offset
-// directly from scrollY — simple, no viewport-centre math needed.
-(function () {
-  const mq      = window.matchMedia('(max-width: 900px)');
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-  if (mq.matches || reduced.matches) return;
+    <script>
+      function closeNav() {
+        document.querySelector(".nav-links").classList.remove("open");
+      }
 
-  const heroBg  = document.querySelector('.hero__bg');
-  if (!heroBg) return;
-  const speed   = parseFloat(heroBg.dataset.parallaxSpeed) || 0.25;
-  let ticking   = false;
+      // Fade-in on scroll
+      // rootMargin fires the observer 60px before the element enters the viewport
+      // threshold:0 means trigger as soon as any pixel is visible
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) e.target.classList.add("visible");
+          });
+        },
+        { threshold: 0, rootMargin: "0px 0px -60px 0px" },
+      );
+      document.querySelectorAll(".fade-in").forEach((el) => observer.observe(el));
 
-  function updateParallax() {
-    // scrollY * speed moves the bg upward at a fraction of the scroll rate
-    heroBg.style.transform = 'translateY(' + (window.scrollY * speed) + 'px)';
-    ticking = false;
-  }
+      // ── HERO PARALLAX ──
+      // The hero is always at the top of the page, so we drive the offset
+      // directly from scrollY — simple, no viewport-centre math needed.
+      (function () {
+        const mq = window.matchMedia("(max-width: 900px)");
+        const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+        if (mq.matches || reduced.matches) return;
 
-  window.addEventListener('scroll', function () {
-    if (!ticking) { requestAnimationFrame(updateParallax); ticking = true; }
-  }, { passive: true });
+        const heroBg = document.querySelector(".hero__bg");
+        if (!heroBg) return;
+        const speed = parseFloat(heroBg.dataset.parallaxSpeed) || 0.25;
+        let ticking = false;
 
-  updateParallax();
-}());
-</script>
-</body>
+        function updateParallax() {
+          // scrollY * speed moves the bg upward at a fraction of the scroll rate
+          heroBg.style.transform = "translateY(" + window.scrollY * speed + "px)";
+          ticking = false;
+        }
+
+        window.addEventListener(
+          "scroll",
+          function () {
+            if (!ticking) {
+              requestAnimationFrame(updateParallax);
+              ticking = true;
+            }
+          },
+          { passive: true },
+        );
+
+        updateParallax();
+      })();
+    </script>
+  </body>
 </html>

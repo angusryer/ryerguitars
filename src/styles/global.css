@@ -1,0 +1,47 @@
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #1a1714;
+  --bg-warm: #211e19;
+  --bg-card: #2a2520;
+  --cream: #e8e0d4;
+  --cream-dim: #b0a696;
+  --accent: #c9a96e;
+  --accent-dim: #a6894f;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Libre Franklin', system-ui, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--cream);
+  font-family: var(--sans);
+  font-weight: 300;
+  line-height: 1.7;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+section { padding: 6rem 1.5rem; }
+.container { max-width: 900px; margin: 0 auto; }
+
+.section-label {
+  font-family: var(--serif);
+  font-size: 0.85rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 2rem;
+}
+
+/* ── ANIMATIONS ── */
+@media (prefers-reduced-motion: no-preference) {
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+}

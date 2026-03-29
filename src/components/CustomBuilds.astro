@@ -1,0 +1,49 @@
+---
+const specs = [
+  'Tops — Sitka Spruce, Lutz Spruce, Engelmann, Cedar',
+  'Backs & Sides — Indian Rosewood or Mahogany',
+  'Neck — Mahogany, Spanish Cedar',
+  'Bridge — Rosewood or Ebony',
+  'Fingerboard — Rosewood or Ebony',
+  'Scale Length — 61 to 65 cm',
+  "Tuners — Gotoh 510's or Schertler",
+  'Nut & Saddle — Bone',
+  'Finish — French polish or Poly',
+];
+---
+<section class="custom" id="custom">
+  <div class="container fade-in">
+    <div class="section-label">Custom Builds</div>
+    <p class="custom-intro">Each instrument is designed and built according to the desires of the player. A 20% non-refundable deposit is required to confirm orders.</p>
+    <div class="price-block">
+      $8,700 base price <span class="price-note">+ options &amp; tax</span>
+    </div>
+    <div class="spec-group">
+      <h3>Standard Specs</h3>
+      <ul>
+        {specs.map((s) => <li>{s}</li>)}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+.custom { background: var(--bg-warm); }
+.custom-intro { color: var(--cream-dim); font-size: 0.95rem; }
+.price-block {
+  font-family: var(--serif); font-size: clamp(1.3rem, 3vw, 1.8rem);
+  color: var(--accent); margin: 1.5rem 0 2rem; font-weight: 300;
+}
+.price-note { font-size: 0.9rem; color: var(--cream-dim); }
+.spec-group { margin-top: 2rem; max-width: 480px; }
+.spec-group h3 {
+  font-family: var(--serif); font-size: 1rem; font-weight: 400;
+  color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase;
+  margin-bottom: 0.8rem;
+}
+.spec-group ul { list-style: none; }
+.spec-group li {
+  color: var(--cream-dim); font-size: 0.88rem; padding: 0.3rem 0;
+  border-bottom: 1px solid rgba(201, 169, 110, 0.06);
+}
+</style>
