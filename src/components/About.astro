@@ -1,56 +1,91 @@
 ---
+
 ---
-<section class="about" id="about">
-  <div class="container fade-in">
-    <div class="section-label">About</div>
-    <div class="about-content">
-      <div class="about-text">
-        <p>I began my path in the 1980s doing repair work for local music stores, where close, hands-on work with well-used instruments built a practical understanding of materials, structure, and feel.</p>
-        <p>Today, tone, balance, and volume guide every guitar I build, shaping an expressive, resonant voice. A gently elevated neck with a subtle twist and an evenly carved profile create a natural, comfortable feel in the hand. Carefully chosen woods and details give each instrument a visual character that reflects its sound. I build only a few guitars each year, each one crafted to inspire creativity and the simple pleasure of playing.</p>
-        <p class="signature">— David Ryer</p>
+
+<section class='about' id='about'>
+  <div class='container fade-in'>
+    <div class='section-label'>About</div>
+    <div class='about-content'>
+      <div class='about-text'>
+        <p>
+          I began working on guitars in the 1980s doing repair work for local music stores, where
+          close, hands-on work with well-used instruments built a practical understanding of
+          materials, structure, and feel.
+        </p>
+        <p>
+          Today, tone, balance, and volume guide every guitar I build, shaping an expressive,
+          resonant voice. A gently elevated neck with a subtle twist and an evenly carved profile
+          create a natural, comfortable feel in the hand. Carefully chosen woods and details give
+          each instrument a visual character that reflects its sound. I build only a few guitars
+          each year, each one crafted to inspire creativity and the simple pleasure of playing.
+        </p>
+        <p class='signature'>— David Ryer</p>
       </div>
       <img
-        class="about-img"
-        src="/ryerguitars/images/bw-ebony-lg/bw-ebony-lg-11.jpg"
-        alt="Dave Ryer in the workshop"
-        width="1600"
-        height="2400"
-        fetchpriority="high"
-        decoding="async"
-      >
+        class='about-img'
+        src='/ryerguitars/images/bw-ebony-lg/bw-ebony-lg-11.jpg'
+        alt='Dave Ryer in the workshop'
+        width='1600'
+        height='2400'
+        fetchpriority='high'
+        decoding='async'
+      />
     </div>
   </div>
 </section>
 
 <style>
-.about { background: var(--bg-warm); }
-.about-content {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
-  align-items: stretch;
-}
-.about-text {
-  display: flex; flex-direction: column; justify-content: center;
-}
-.about-text p { margin-bottom: 1.2rem; color: var(--cream-dim); font-size: 0.95rem; }
-.about-text .signature {
-  font-family: var(--serif); font-style: italic;
-  color: var(--accent); font-size: 1.1rem; margin-top: 2rem;
-}
-.about-img {
-  width: 100%; height: 100%; object-fit: cover;
-  filter: grayscale(20%) contrast(1.05);
-  border: 1px solid rgba(201, 169, 110, 0.15);
-  background: var(--bg-card);
-  display: block;
-  min-height: 300px;
-}
-@media (max-width: 1024px) and (min-width: 901px) {
-  .about-content { grid-template-columns: 1.3fr 0.7fr; gap: 2rem; }
-}
-@media (max-width: 900px) {
-  .about-content { grid-template-columns: 1fr; }
-  .about-img {
-    height: auto; aspect-ratio: 1 / 1; width: 100%; min-height: unset;
+  .about {
+    background: var(--bg-warm);
   }
-}
+  .about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: stretch;
+  }
+  .about-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .about-text p {
+    margin-bottom: 1.2rem;
+    color: var(--cream-dim);
+    font-size: 0.95rem;
+  }
+  .about-text .signature {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--accent);
+    font-size: 1.1rem;
+    margin-top: 2rem;
+  }
+  .about-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(20%) contrast(1.05);
+    border: 1px solid rgba(201, 169, 110, 0.15);
+    background: var(--bg-card);
+    display: block;
+    min-height: 300px;
+  }
+  @media (max-width: 1024px) and (min-width: 901px) {
+    .about-content {
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 2rem;
+    }
+  }
+  @media (max-width: 900px) {
+    .about-content {
+      grid-template-columns: 1fr;
+    }
+    .about-img {
+      height: auto;
+      aspect-ratio: 1 / 1;
+      width: 100%;
+      min-height: unset;
+    }
+  }
 </style>
