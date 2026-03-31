@@ -122,7 +122,7 @@
         title: `Message from ${senderName}`, // matches {{title}} in Subject
         message: (form.querySelector('[name="message"]') as HTMLTextAreaElement).value,
       });
-      status.textContent = "Message sent — Dave will be in touch soon.";
+      status.textContent = "Message sent — I'll be in touch soon.";
       status.className = "form-status success";
       form.reset();
     } catch (err) {
