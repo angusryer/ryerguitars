@@ -119,7 +119,7 @@
       await emailjs.send(SERVICE_ID, TEMPLATE_ID, {
         name: senderName,
         email: senderEmail, // matches {{email}} in Reply To
-        title: `Message from ${senderName}`, // matches {{title}} in Subject
+        title: senderName, // matches {{title}} in Subject, which is set in EmailJS portal
         message: (form.querySelector('[name="message"]') as HTMLTextAreaElement).value,
       });
       status.textContent = "Message sent — I'll be in touch soon.";

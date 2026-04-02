@@ -1,16 +1,17 @@
 ---
-import Base from '../layouts/Base.astro';
-import Nav from '../components/Nav.astro';
-import Hero from '../components/Hero.astro';
-import OrnamentDivider from '../components/OrnamentDivider.astro';
-import About from '../components/About.astro';
-import Gallery from '../components/Gallery.astro';
-import VideoEmbed from '../components/VideoEmbed.astro';
-import CustomBuilds from '../components/CustomBuilds.astro';
-import Contact from '../components/Contact.astro';
-import Footer from '../components/Footer.astro';
-import '../styles/global.css';
+import Base from "../layouts/Base.astro";
+import Nav from "../components/Nav.astro";
+import Hero from "../components/Hero.astro";
+import OrnamentDivider from "../components/OrnamentDivider.astro";
+import About from "../components/About.astro";
+import Gallery from "../components/Gallery.astro";
+import VideoEmbed from "../components/VideoEmbed.astro";
+import CustomBuilds from "../components/CustomBuilds.astro";
+import Contact from "../components/Contact.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
 ---
+
 <Base>
   <Nav />
   <Hero />
@@ -19,7 +20,10 @@ import '../styles/global.css';
   <OrnamentDivider />
   <Gallery />
   <OrnamentDivider />
-  <VideoEmbed src="https://www.youtube.com/embed/YG6Q96wtJ0M?si=0ze_Zs856zxM4gin" title="David Ryer Guitars" />
+  <VideoEmbed
+    src='https://www.youtube.com/embed/YG6Q96wtJ0M?si=0ze_Zs856zxM4gin'
+    title='David Ryer Guitars'
+  />
   <OrnamentDivider />
   <CustomBuilds />
   <OrnamentDivider />
@@ -28,46 +32,56 @@ import '../styles/global.css';
 </Base>
 
 <script>
-// Fade-in on scroll
-const observer = new IntersectionObserver(
-  (entries) => entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('visible'); }),
-  { threshold: 0, rootMargin: '0px 0px -60px 0px' }
-);
-document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
+  // Fade-in on scroll
+  const observer = new IntersectionObserver(
+    (entries) =>
+      entries.forEach((e) => {
+        if (e.isIntersecting) e.target.classList.add("visible");
+      }),
+    { threshold: 0, rootMargin: "0px 0px -60px 0px" },
+  );
+  document.querySelectorAll(".fade-in").forEach((el) => observer.observe(el));
 
-// Hero parallax
-(function () {
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-  if (reduced.matches) return;
+  // Hero parallax
+  (function () {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (reduced.matches) return;
 
-  const heroBg = document.querySelector('.hero__bg') as HTMLElement | null;
-  const hero   = document.querySelector('.hero') as HTMLElement | null;
-  if (!heroBg || !hero) return;
+    const heroBg = document.querySelector(".hero__bg") as HTMLElement | null;
+    const hero = document.querySelector(".hero") as HTMLElement | null;
+    if (!heroBg || !hero) return;
 
-  const speed = parseFloat(heroBg.dataset.parallaxSpeed ?? '0.25') || 0.25;
-  const mq    = window.matchMedia('(max-width: 900px)');
-  let ticking = false;
-  let enabled = !mq.matches;
+    const speed = parseFloat(heroBg.dataset.parallaxSpeed ?? "0.25") || 0.25;
+    const mq = window.matchMedia("(max-width: 900px)");
+    let ticking = false;
+    let enabled = !mq.matches;
 
-  // Re-evaluate on resize
-  mq.addEventListener('change', (e) => {
-    enabled = !e.matches;
-    if (!enabled) heroBg.style.transform = '';
-  });
+    // Re-evaluate on resize
+    mq.addEventListener("change", (e) => {
+      enabled = !e.matches;
+      if (!enabled) heroBg.style.transform = "";
+    });
 
-  function update() {
-    ticking = false;
-    if (!enabled) return;
-    // Only apply while hero is in view
-    const bottom = hero!.getBoundingClientRect().bottom;
-    if (bottom < 0) return;
-    heroBg.style.transform = `translateY(${window.scrollY * speed}px)`;
-  }
+    function update() {
+      ticking = false;
+      if (!enabled) return;
+      // Only apply while hero is in view
+      const bottom = hero!.getBoundingClientRect().bottom;
+      if (bottom < 0 || !heroBg || !heroBg?.style) return;
+      heroBg.style.transform = `translateY(${window.scrollY * speed}px)`;
+    }
 
-  window.addEventListener('scroll', () => {
-    if (!ticking) { requestAnimationFrame(update); ticking = true; }
-  }, { passive: true });
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!ticking) {
+          requestAnimationFrame(update);
+          ticking = true;
+        }
+      },
+      { passive: true },
+    );
 
-  update();
-})();
+    update();
+  })();
 </script>
