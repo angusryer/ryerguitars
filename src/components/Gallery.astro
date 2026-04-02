@@ -1,8 +1,44 @@
 ---
 const images = [
-  'ryer-lg-100', 'ryer-lg-104', 'ryer-lg-108', 'ryer-lg-112',
-  'ryer-lg-116', 'ryer-lg-120', 'ryer-lg-124', 'ryer-lg-128',
-  'ryer-lg-132', 'ryer-lg-136', 'ryer-lg-140', 'ryer-lg-144',
+  // B&W ebony series
+  { src: 'bw-ebony-lg/bw-ebony-lg-10' },
+  { src: 'bw-ebony-lg/bw-ebony-lg-13' },
+  { src: 'bw-ebony-lg/bw-ebony-lg-16' },
+  { src: 'bw-ebony-lg/bw-ebony-lg-17' },
+  { src: 'bw-ebony-lg/bw-ebony-lg-18' },
+  { src: 'bw-ebony-lg/bw-ebony-lg-19' },
+  { src: 'bw-ebony-lg/bw-ebony-lg-21' },
+  { src: 'bw-ebony-lg/bw-ebony-lg-23' },
+  // Colour series
+  { src: 'ryer-lg/ryer-lg-100' },
+  { src: 'ryer-lg/ryer-lg-101' },
+  { src: 'ryer-lg/ryer-lg-103' },
+  { src: 'ryer-lg/ryer-lg-104' },
+  { src: 'ryer-lg/ryer-lg-105' },
+  { src: 'ryer-lg/ryer-lg-106' },
+  { src: 'ryer-lg/ryer-lg-107' },
+  { src: 'ryer-lg/ryer-lg-108' },
+  { src: 'ryer-lg/ryer-lg-110' },
+  { src: 'ryer-lg/ryer-lg-116' },
+  { src: 'ryer-lg/ryer-lg-117' },
+  { src: 'ryer-lg/ryer-lg-122' },
+  { src: 'ryer-lg/ryer-lg-123' },
+  { src: 'ryer-lg/ryer-lg-125' },
+  { src: 'ryer-lg/ryer-lg-126' },
+  { src: 'ryer-lg/ryer-lg-127' },
+  { src: 'ryer-lg/ryer-lg-128' },
+  { src: 'ryer-lg/ryer-lg-129' },
+  { src: 'ryer-lg/ryer-lg-132' },
+  { src: 'ryer-lg/ryer-lg-133' },
+  { src: 'ryer-lg/ryer-lg-134' },
+  { src: 'ryer-lg/ryer-lg-136' },
+  { src: 'ryer-lg/ryer-lg-138' },
+  { src: 'ryer-lg/ryer-lg-140' },
+  { src: 'ryer-lg/ryer-lg-142' },
+  { src: 'ryer-lg/ryer-lg-147' },
+  { src: 'ryer-lg/ryer-lg-149' },
+  { src: 'ryer-lg/ryer-lg-150' },
+  { src: 'ryer-lg/ryer-lg-152' },
 ];
 ---
 <section class="models" id="models">
@@ -12,7 +48,7 @@ const images = [
       {images.map((img, i) => (
         <button class="gallery-card" data-index={i} type="button" aria-label="View full size">
           <img
-            src={`/images/ryer-lg/${img}.jpg`}
+            src={`/images/${img.src}.jpg`}
             alt="Ryer Guitar"
             width="1600"
             height="2400"
