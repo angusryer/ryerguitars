@@ -56,7 +56,7 @@ npm install
 
 # Start dev server with hot reload
 npm run dev
-# → http://localhost:4321/ryerguitars/
+# → http://localhost:4321/
 ```
 
 ---
@@ -69,7 +69,7 @@ npm run build
 
 # Preview the production build locally
 npm run preview
-# → http://localhost:4321/ryerguitars/
+# → http://localhost:4321/
 ```
 
 ---
@@ -133,46 +133,38 @@ Dave's email is hosted by [Nesda Technology](https://nesda.ca) in Belleville, On
 
 ---
 
-## Custom domain migration (GitHub Pages → www.ryerguitars.com)
+## Custom domain (www.ryerguitars.com)
 
-### Code changes required
+Code changes are done — `public/CNAME`, `astro.config.mjs`, and image paths are all configured for the custom domain. The remaining steps are DNS and GitHub settings.
 
-1. Add a `public/CNAME` file containing exactly:
-   ```
-   www.ryerguitars.com
-   ```
-2. Update `astro.config.mjs`:
-   ```js
-   site: 'https://www.ryerguitars.com',
-   // remove the base line entirely
-   ```
-3. Remove the `/ryerguitars` prefix from all image paths in:
-   - `src/components/Hero.astro`
-   - `src/components/About.astro`
-   - `src/components/Gallery.astro`
-4. Update the dev/preview URLs in this README if desired
+### DNS records (managed by Nesda Technology)
 
-### DNS records (at your domain registrar)
+DNS for `ryerguitars.com` is managed by [Nesda Technology](https://nesda.ca) in Belleville, Ontario. Contact Nesda and request the following changes. **MX records must be left untouched** — they control Dave's email.
 
-Add these records to point `ryerguitars.com` at GitHub Pages:
+**Replace existing A records for `ryerguitars.com` (the apex `@`) with:**
 
-**Apex domain (`ryerguitars.com`) — four A records:**
-```
-185.199.108.153
-185.199.109.153
-185.199.110.153
-185.199.111.153
-```
+| Type | Name | Value |
+|------|------|-------|
+| A | @ | 185.199.108.153 |
+| A | @ | 185.199.109.153 |
+| A | @ | 185.199.110.153 |
+| A | @ | 185.199.111.153 |
 
-**`www` subdomain — one CNAME record:**
-```
-www  →  angusryer.github.io
-```
+**Add a CNAME record for `www`:**
+
+| Type | Name | Value |
+|------|------|-------|
+| CNAME | www | angusryer.github.io |
+
+> These are GitHub Pages' official IPs. Verify at any time: `dig pages.github.com +noall +answer`
 
 ### GitHub Pages settings
 
-- Repo → Settings → Pages → Custom domain → enter `www.ryerguitars.com` → Save
-- Wait for the DNS check to pass, then enable **Enforce HTTPS**
+After Nesda confirms the DNS changes:
+
+1. Repo → Settings → Pages → Custom domain → enter `www.ryerguitars.com` → Save
+2. Wait for the DNS check to pass (can take 15–30 min, occasionally longer)
+3. Enable **Enforce HTTPS**
 
 ---
 
