@@ -1,65 +1,96 @@
 ---
+
 ---
-<section class="hero" id="home">
-  <div class="hero__bg" data-parallax-speed="0.25"></div>
-  <div class="hero-content">
+
+<section class='hero' id='home'>
+  <div class='hero__bg' data-parallax-speed='0.25'></div>
+  <div class='hero-content'>
     <h1>Ryer Guitars</h1>
-    <div class="hero-rule"></div>
-    <p>Meticulously handcrafted acoustic and classical guitars, built with uncompromising standards.</p>
-    <span class="hero-sub">Madoc, Ontario</span>
+    <div class='hero-rule'></div>
+    <p>Meticulously handcrafted classical guitars, built with uncompromising standards and joy.</p>
+    <span class='hero-sub'>Madoc, Ontario</span>
   </div>
 </section>
 
 <style>
-.hero {
-  min-height: 100vh; display: flex; align-items: center; justify-content: center;
-  text-align: center; padding-top: 5rem;
-  position: relative; overflow: hidden;
-  background-color: #0e0c0a;
-}
-.hero__bg {
-  position: absolute;
-  top: -20vh; bottom: -20vh; left: 0; right: 0;
-  background-image: url('/images/bw-ebony-lg/bw-ebony-lg-10.jpg');
-  background-size: cover;
-  background-position: center;
-  will-change: transform;
-  filter: grayscale(20%) contrast(1.05);
-}
-.hero__bg::after {
-  content: ''; position: absolute; inset: 0;
-  background: rgba(14, 10, 8, 0.62);
-  z-index: 1;
-}
-.hero__bg::before {
-  content: ''; position: absolute; inset: 0;
-  background:
-    radial-gradient(ellipse at 30% 50%, rgba(201, 169, 110, 0.08) 0%, transparent 60%),
-    radial-gradient(ellipse at 70% 70%, rgba(201, 169, 110, 0.05) 0%, transparent 50%);
-  z-index: 2;
-}
-@media (max-width: 900px) {
-  .hero__bg { top: 0; bottom: 0; }
-}
-.hero-content { position: relative; z-index: 2; padding: 0 1.5rem; }
-.hero h1 {
-  font-family: var(--serif); font-weight: 300;
-  font-size: clamp(2.8rem, 7vw, 5.5rem);
-  line-height: 1.1; letter-spacing: 0.04em;
-  margin-bottom: 1.5rem; color: var(--cream);
-}
-.hero p {
-  font-size: 1rem; color: var(--cream);
-  max-width: 480px; margin: 0 auto 2.5rem;
-  letter-spacing: 0.02em;
-}
-.hero-rule {
-  width: 60px; height: 1px; background: var(--accent);
-  margin: 0 auto 2rem; opacity: 0.6;
-}
-.hero-sub {
-  font-family: var(--serif); font-size: 0.85rem;
-  letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--accent);
-}
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-top: 5rem;
+    position: relative;
+    overflow: hidden;
+    background-color: #0e0c0a;
+  }
+  .hero__bg {
+    position: absolute;
+    top: -20vh;
+    bottom: -20vh;
+    left: 0;
+    right: 0;
+    background-image: url("/images/bw-ebony-lg/bw-ebony-lg-10.jpg");
+    background-size: cover;
+    background-position: center;
+    will-change: transform;
+    filter: grayscale(20%) contrast(1.05);
+  }
+  .hero__bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(14, 10, 8, 0.62);
+    z-index: 1;
+  }
+  .hero__bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 30% 50%, rgba(201, 169, 110, 0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 70% 70%, rgba(201, 169, 110, 0.05) 0%, transparent 50%);
+    z-index: 2;
+  }
+  @media (max-width: 900px) {
+    .hero__bg {
+      top: 0;
+      bottom: 0;
+    }
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 1.5rem;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    line-height: 1.1;
+    letter-spacing: 0.04em;
+    margin-bottom: 1.5rem;
+    color: var(--cream);
+  }
+  .hero p {
+    font-size: 1rem;
+    color: var(--cream);
+    max-width: 480px;
+    margin: 0 auto 2.5rem;
+    letter-spacing: 0.02em;
+  }
+  .hero-rule {
+    width: 60px;
+    height: 1px;
+    background: var(--accent);
+    margin: 0 auto 2rem;
+    opacity: 0.6;
+  }
+  .hero-sub {
+    font-family: var(--serif);
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
 </style>
