@@ -43,6 +43,7 @@ const images = [
 <section class="models" id="models">
   <div class="container fade-in">
     <div class="section-label">Gallery</div>
+    <p class="gallery-credit">Photography by <a href="https://www.picsandtweaks.com" target="_blank" rel="noopener">Pics &amp; Tweaks Photography</a></p>
     <div class="gallery-grid">
       {images.map((img, i) => (
         <button class="gallery-card" data-index={i} type="button" aria-label="View full size">
@@ -126,6 +127,17 @@ const images = [
 </script>
 
 <style>
+.gallery-credit {
+  color: var(--cream-dim); font-size: 0.85rem; margin-bottom: 0.5rem;
+}
+.gallery-credit a {
+  color: var(--accent-dim); text-decoration: none;
+  border-bottom: 1px solid rgba(201, 169, 110, 0.3);
+  transition: color 0.3s, border-color 0.3s;
+}
+.gallery-credit a:hover {
+  color: var(--accent); border-color: var(--accent);
+}
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
